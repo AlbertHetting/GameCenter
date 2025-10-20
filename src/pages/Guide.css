@@ -1,9 +1,17 @@
+body {
+  margin: 0;
+  background: url('/img/BackgroundReverse.png') center / cover no-repeat fixed;
+}
+
 .conceptheader{
-    margin-top: 5rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.conceptcon{
+    margin-top: 2rem;
 }
 
 
@@ -27,3 +35,90 @@ h1{
     align-items: center;
 }
 
+.circle1{
+    width: 5rem;
+    height: 5rem;
+    background-color: white;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.circle1 h2{
+   font-size: 58px;
+   font-family: "Inter", sans-serif;
+   color: black;
+   font-weight: 800;
+}
+
+.step1{
+    width: 17rem;
+    height: 5rem;
+    background-color: white;
+    border-radius: 13px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.step1 h3{
+    font-size: 22px;
+    font-family: "Inter", sans-serif;
+    text-align: center;
+    font-weight: 900;
+    max-width: 15rem;
+}
+
+.numberrule{
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+
+.rulecontainer{
+    margin-top: 2rem;
+}
+
+.continuecon{
+  display:flex;
+  justify-content:center;
+}
+
+.continuebutton{
+  position: relative;
+  margin-top: 6rem;
+  height: 3.5rem;
+  width: 14rem;
+  border-radius: 13px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* no background and no mix-blend-mode here */
+}
+
+/* background layer that blends */
+.continuebutton::before{
+  content: "";
+  position: absolute;
+  inset: 0;                 /* top/right/bottom/left: 0 */
+  border-radius: inherit;
+  background: black;
+  mix-blend-mode: overlay;  /* only this layer blends */
+  z-index: 0;
+  pointer-events: none;     /* clicks go through */
+}
+
+/* text stays normal, above the blended layer */
+.continuebutton > *{
+  position: relative;
+  z-index: 1;
+}
+
+.continuebutton h4{
+  color: white;
+  font-family: "Inter", sans-serif;
+  font-size: 30px;
+}
