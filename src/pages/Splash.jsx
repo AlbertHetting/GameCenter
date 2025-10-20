@@ -5,13 +5,13 @@ import { useNavigate } from "react-router";
 export default function Splash() {
   const navigate = useNavigate();
 
-  useEffect(() => {
+  /*  useEffect(() => {
     const timer = setTimeout(() => {
       navigate("/guide"); // redirect after loading
-    }, 4000); // show splash for 2s
+    }, 10000); // show splash for 2s
 
     return () => clearTimeout(timer);
-  }, [navigate]);
+  }, [navigate]); */
 
   return (
     <main className="bg-[url('/img/Background1.png')] flex flex-col h-screen w-screen justify-around items-center bg-cover bg-center">
