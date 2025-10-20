@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate} from "react-router";
+import { Routes, Route, Navigate } from "react-router";
 import Splash from "./pages/Splash";
 import QuickGuide from "./pages/QuickGuide";
 import Profile from "./pages/Profile";

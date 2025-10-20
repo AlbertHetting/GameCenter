@@ -1,25 +1,39 @@
+// src/pages/Splash.jsx
+import { useEffect } from "react";
+import { useNavigate } from "react-router";
+
 export default function Splash() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      navigate("/guide"); // redirect after loading
+    }, 4000); // show splash for 2s
+
+    return () => clearTimeout(timer);
+  }, [navigate]);
+
   return (
-    <main className="bg-[url('/img/Background1.png')] flex flex-col h-screen w-screen justify-start items-center bg-cover bg-center m-0">
+    <main className="bg-[url('/img/Background1.png')] flex flex-col h-screen w-screen justify-around items-center bg-cover bg-center">
       <div className="flex flex-col items-center">
         <img
           className="size-[80vw]"
-          src="public/img/GameSquareLogo2.svg"
+          src="/img/GameSquareLogo2.svg"
           alt="GameSquare Logo"
         />
-        <h1 className="">Loading...</h1>
+        <h1>Loading...</h1>
       </div>
 
       <div>
-        <img src="public/img/PlayingCards.png" alt="" />
+        <img src="/img/PlayingCards.png" alt="Playing cards" />
       </div>
 
       <div>
-        <h1>did you know...</h1>
+        <h1>Did you know...</h1>
       </div>
 
-      <div className="text-white">
-        <h4>®GameSquare 2025</h4>
+      <div className="mt-auto text-center text-white text-sm font-bold font-['Inter']">
+        ®GameSquare 2025
       </div>
     </main>
   );
