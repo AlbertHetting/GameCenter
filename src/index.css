@@ -1,15 +1,7 @@
+@import "tailwindcss";
 /* ---------- Root Variables ---------- */
 :root {
-  --green: rgb(38, 76, 89);
-  --dark-green: rgb(9, 47, 59);
-  --light-green: rgb(172, 198, 201);
-  --light-grey: #f1f1f4;
-  --text-color-danger: #f44250;
-  --text-color-dark: #333;
-  --text-color-light: #f1f1f1;
-  --white: #f1f1f1;
 }
-
 /* ---------- Global Styling ---------- */
 html {
   box-sizing: border-box;
