@@ -1,5 +1,10 @@
-export default function(){
+
+
+export default function QuickGuide(){
     return(
-        <h1>This the Quick Guide with its component</h1>
+        <div>
+        <img src="public/img/Concept.png" alt="" />
+        <h1>HELLO!</h1>
+        </div>
     )
 }
