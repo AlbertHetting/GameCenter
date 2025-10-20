@@ -7,6 +7,13 @@ html {
   box-sizing: border-box;
 }
 
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
 *,
 *:before,
 *:after {
@@ -25,64 +32,3 @@ html {
   padding: 0;
 }
 
-/* ---------- Typography ---------- */
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-h2,
-h3 {
-  font-weight: 500;
-  letter-spacing: 0.1px;
-}
-
-/* ---------- Link Styling ---------- */
-a {
-  color: var(--green);
-  text-decoration: none;
-  transition: 0.5s;
-}
-
-a:hover {
-  color: var(--dark-green);
-}
-
-/* ---------- Navigation Styling ---------- */
-nav {
-  background-color: var(--green);
-  display: grid;
-  left: 0;
-  position: fixed;
-  right: 0;
-  text-align: center;
-  top: 0;
-  padding: 1em 2em;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 1em;
-}
-
-nav a {
-  display: inline-block;
-  color: var(--text-color-light);
-  text-align: center;
-  padding: 20px 16px;
-  text-decoration: none;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  border: 2px solid var(--green);
-  font-weight: 500;
-  font-size: 1.2em;
-  border-radius: 8px;
-  transition: 0.5s;
-}
-
-nav a:hover {
-  background-color: var(--light-green);
-  color: var(--green);
-}
-
-nav a.active {
-  background-color: var(--light-green);
-  color: var(--green);
-}
