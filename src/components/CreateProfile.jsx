@@ -16,13 +16,14 @@ export default function CreateProfile() {
       {/*Buttons */}
       <div></div>
 
-      <div>
-        <h1>Did you know...</h1>
+      <div className="flex justify-center text-white">
+        <h2 className="text-center">
+          Already have a <br /> user?
+        </h2>
       </div>
 
-      <div className="text-center text-white text-sm font-bold font-['Inter']">
-        ®GameSquare 2025
-      </div>
+      {/*Animation bar */}
+      <div></div>
     </main>
   );
 }
