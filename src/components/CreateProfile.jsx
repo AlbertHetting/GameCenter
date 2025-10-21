@@ -23,7 +23,9 @@ export default function CreateProfile() {
       </div>
 
       {/*Animation bar */}
-      <div></div>
+      <div>
+        
+      </div>
     </main>
   );
 }
