@@ -1,3 +1,4 @@
+import ButtonSignup from "./ButtonSignup";
 export default function CreateProfile() {
   return (
     <main className="bg-[url('/img/Background1.png')] flex flex-col h-screen w-screen justify-around items-center bg-cover bg-center">
@@ -14,7 +15,9 @@ export default function CreateProfile() {
       <div></div>
 
       {/*Buttons */}
-      <div></div>
+      <div>
+        <ButtonSignup />
+      </div>
 
       <div>
         <h1>Did you know...</h1>
