@@ -19,7 +19,7 @@ body {
     max-width: 20rem;
 }
 
-h1{
+.textcon h1{
     font-size: 23px;
     font-style: italic;
     font-weight: 400;

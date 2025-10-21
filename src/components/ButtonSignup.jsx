@@ -1,7 +1,11 @@
 export default function ButtonSignup() {
   return (
-    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-      Sign Up
+    <button className="w-44 h-12 bg-white rounded-2xl">
+      <p className="text-black
+text-2xl
+font-bold
+font-['Inter']" >Sign Up</p>
     </button>
+
   );
 }
