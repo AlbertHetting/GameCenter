@@ -32,7 +32,7 @@ export default function Splash() {
         <h1>Did you know...</h1>
       </div>
 
-      <div className="mt-auto text-center text-white text-sm font-bold font-['Inter']">
+      <div className="text-center text-white text-sm font-bold font-['Inter']">
         ®GameSquare 2025
       </div>
     </main>
