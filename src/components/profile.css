@@ -55,3 +55,50 @@ flex-shrink: 0;
 
 
 
+/* ===== Reveal-on-load (no JS) ===== */
+:root {
+  --reveal-distance: -25px;
+  --reveal-duration: 0.5s;
+  --stagger-step: 120ms; /* tweak as you like */
+}
+
+@keyframes fadeDownIn {
+  from {
+    opacity: 0;
+    transform: translateY(var(--reveal-distance));
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Option A: generic "great-grandchildren" selector */
+.program-icons.reveal  > * > * {
+  opacity: 0;
+  animation: fadeDownIn var(--reveal-duration) ease forwards;
+  will-change: opacity, transform;
+}
+
+.program-icons.reveal > section > .rulecontainer > .numberrule {
+  opacity: 0;
+  animation: fadeDownIn var(--reveal-duration) ease forwards;
+}
+
+/* Stagger delays for the rule items (1..9, adjust as needed) */
+.program-icons.reveal.stagger > section > .rulecontainer > .numberrule:nth-child(1) {
+  animation-delay: calc(0 * var(--stagger-step));
+}
+.program-icons.reveal.stagger > section > .rulecontainer > .numberrule:nth-child(2) {
+  animation-delay: calc(1 * var(--stagger-step));
+}
+.program-icons.reveal.stagger > section > .rulecontainer > .numberrule:nth-child(3) {
+  animation-delay: calc(2 * var(--stagger-step));
+}
+.program-icons.reveal.stagger > section > .rulecontainer > .numberrule:nth-child(4) {
+  animation-delay: calc(3 * var(--stagger-step));
+}
+
+
+
+

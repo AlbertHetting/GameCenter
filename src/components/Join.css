@@ -1,0 +1,122 @@
+.logo-game{
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+}
+
+.logocon-join-game h1{
+    margin-top: 6rem;
+    text-align: center;
+    font-size: 35px;
+    align-items: center;
+    font-family: "Inter", sans-serif;
+    color: #FFF;
+}
+
+.logocon-game img{
+    margin-top: 1rem;
+    max-width: 72vw;
+}
+
+/*Forms*/
+
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.input-area-game{
+border-radius: 14px;
+border: 2px solid #FFF;
+background: #FFF;
+margin-bottom: 0rem;
+padding: 10px;
+width: 18rem;
+height: 4.2rem;
+flex-shrink: 0;
+}
+
+.input-area-game::placeholder{
+font-size: 27px;
+text-align: center;
+font-family: "Inter" sans-serif;
+color: grey;
+}
+
+.input-area-game, text{
+text-align: center;
+font-size: 32px;
+font-family: "Inter" sans-serif;
+font-weight: 700;
+}
+
+.button-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-self: center;
+    margin-top: 2rem;
+}
+
+.button-container h4{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+
+
+
+/* ===== Reveal-on-load (no JS) ===== */
+:root {
+  --reveal-distance: -25px;
+  --reveal-duration: 0.5s;
+  --stagger-step: 120ms; /* tweak as you like */
+}
+
+@keyframes fadeDownIn {
+  from {
+    opacity: 0;
+    transform: translateY(var(--reveal-distance));
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Option A: generic "great-grandchildren" selector */
+.program-icons.reveal  > * > * {
+  opacity: 0;
+  animation: fadeDownIn var(--reveal-duration) ease forwards;
+  will-change: opacity, transform;
+}
+
+.program-icons.reveal > section > .rulecontainer > .numberrule {
+  opacity: 0;
+  animation: fadeDownIn var(--reveal-duration) ease forwards;
+}
+
+/* Stagger delays for the rule items (1..9, adjust as needed) */
+.program-icons.reveal.stagger > section > .rulecontainer > .numberrule:nth-child(1) {
+  animation-delay: calc(0 * var(--stagger-step));
+}
+.program-icons.reveal.stagger > section > .rulecontainer > .numberrule:nth-child(2) {
+  animation-delay: calc(1 * var(--stagger-step));
+}
+.program-icons.reveal.stagger > section > .rulecontainer > .numberrule:nth-child(3) {
+  animation-delay: calc(2 * var(--stagger-step));
+}
+.program-icons.reveal.stagger > section > .rulecontainer > .numberrule:nth-child(4) {
+  animation-delay: calc(3 * var(--stagger-step));
+}
+
+
+
+.backspace{
+    max-width: 2rem;
+    position: fixed;
+    margin-top: -2rem;
+    margin-left: 1rem;
+}
