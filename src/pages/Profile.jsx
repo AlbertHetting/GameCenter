@@ -1,6 +1,6 @@
 import CreateProfile from "../components/CreateProfile";
 
-export default function () {
+export default function Profile () {
   return (
     <>
       <CreateProfile />
