@@ -3,7 +3,7 @@ import ThumbnailGrid from "../components/ThumbnailGrid";
 
 export default function Browse() {
   return (
-    <main className="flex flex-col items-center">
+    <main className="flex flex-col items-center browse-background">
       <div className="logo">
         <section className="logocon flex flex-col items-center gap-4">
           <img
