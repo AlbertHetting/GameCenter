@@ -3,7 +3,7 @@ import { Link } from "react-router";
 
 export default function QuickGuide(){
     return(
-         <body id="QuickGuide">
+    <body>
              
        <main>
         <article>
