@@ -7,7 +7,10 @@ export default function Join() {
 
   return (
     
+    <body id="gamejoincss">
+      
     
+
     <main>
 
 
@@ -57,7 +60,7 @@ export default function Join() {
 
       </div>
     </main>
-  
+  </body>
 
 );
   
