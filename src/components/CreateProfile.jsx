@@ -1,16 +1,15 @@
 // src/CreateProfile.jsx
-import { useState } from "react";
+import { useState} from "react";
 import "./profile.css";
 import { auth, db } from "/firebaseClient"; // from Step 2
 import ButtonSignup from "./ButtonSignup";
-import ButtonLogin from "./ButtonLogin";
+import ButtonReturnToLogin from "./ButtonReturnToLogin";
 import {
   createUserWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
 import { ref, set, serverTimestamp } from "firebase/database";
-
-
+import { useNavigate } from "react-router";
 
 
 export default function CreateProfile() {
@@ -21,9 +20,12 @@ const [email, setEmail] = useState("");
 const [username, setUsername] = useState("");
 const [password, setPassword] = useState("");
 
+
 // --- Feedback (optional but helpful) ---
 const [formError, setFormError] = useState("");
 const [formSuccess, setFormSuccess] = useState("");
+
+const navigate = useNavigate();
 
 
 async function onSubmit(e) {
@@ -47,7 +49,11 @@ async function onSubmit(e) {
       createdAt: serverTimestamp(),
     });
 
-    setFormSuccess("Account created!");
+    setFormSuccess("Account created!")  
+
+     // ✅ Redirect immediately after successful login
+    navigate("/browse");
+    
   } catch (err) {
     // Show raw Firebase message for simplicity
     setFormError(err.message || "Something went wrong.");
@@ -107,7 +113,7 @@ async function onSubmit(e) {
 
         <h4 className="text-center font-semi text-white">Already have a <br /> user?</h4>
 
-        <ButtonLogin />
+        <ButtonReturnToLogin />
       </div>
       </form>
 

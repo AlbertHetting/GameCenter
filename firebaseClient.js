@@ -1,7 +1,7 @@
 // src/lib/firebase.ts
 import { initializeApp, getApps, getApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
 import { getDatabase } from "firebase/database";
+import { getAuth, setPersistence, browserLocalPersistence } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -13,6 +13,8 @@ const firebaseConfig = {
 
 export const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
 
+
 // Reusable SDK instances
 export const auth = getAuth(app);
 export const db = getDatabase(app);
+setPersistence(auth, browserLocalPersistence).catch(console.error);
