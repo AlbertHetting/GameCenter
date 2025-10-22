@@ -3,9 +3,8 @@ import { Link } from "react-router";
 
 export default function QuickGuide(){
     return(
-    <body>
-             
-       <main>
+          
+       <main className="GuideBackground" >
         <article>
             <div className="rulecontainer program-icons reveal stagger">
         <section>
@@ -72,6 +71,6 @@ export default function QuickGuide(){
         </div>
         </article>
         </main>
-        </body>  
+    
     )
 }

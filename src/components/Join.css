@@ -1,6 +1,23 @@
+.JoinBackground{
+  display: flex;               /* flex */
+  flex-direction: column;      /* flex-col */
+  height: 100vh;               /* h-screen */
+  width: 100vw;                /* w-screen */
+  justify-content: space-around; /* justify-around */
+  align-items: center;         /* items-center */
+
+  background-image: url('/img/Background1.png'); /* bg-[url(...)] */
+  background-size: cover;      /* bg-cover */
+  background-position: center; /* bg-center */
+  background-repeat: no-repeat;
+}
+
+.joincon{
+  margin-top: -3rem;
+}
 
 .logo-game{
-    margin-top: 3rem;
+    margin-top: 0rem;
     display: flex;
     justify-content: center;
 }
@@ -117,7 +134,7 @@ font-weight: 700;
 
 .backspace{
     max-width: 2rem;
-    position: fixed;
+    position: absolute;
     margin-top: -2rem;
     margin-left: 1rem;
 }

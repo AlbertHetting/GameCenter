@@ -6,14 +6,12 @@ export default function Join() {
 
 
   return (
-    
-    <body id="gamejoincss">
       
     
 
-    <main>
+    <main className="JoinBackground">
 
-
+      <section className="joincon">
         <div>
             <Link to="/browse">
             <img className="backspace" src="/img/BackSpace.png" alt="Return" />
@@ -59,8 +57,8 @@ export default function Join() {
       </form>
 
       </div>
+      </section>
     </main>
-  </body>
 
 );
   
