@@ -3,28 +3,23 @@ import { Link } from "react-router";
 
 export default function QuickGuide(){
     return(
-            
-       <main>
+          
+       <main className="GuideBackground" >
+        <article>
+            <div className="rulecontainer program-icons reveal stagger">
         <section>
 
-
-
-        <div>
+      
+        
         <div className="conceptheader">
         <div className="conceptcon" >
         <img className="Concept" src="/img/Concept.png" alt="" />
         </div>
-        </div>
-
 
         <div className="textcon">
         <h1>Games have rules here's how to play!</h1>
         </div>
         </div>
-
-       
-       
-       
         <div className="rulecontainer">
 
         <section className="numberrule">
@@ -61,18 +56,21 @@ export default function QuickGuide(){
         <div className="step1">
             <h3>Enjoy the game experience!</h3>
         </div>
+        
         </section>
 
         </div>
 
 
             <div className="continuecon">
-            <Link to="/browse" className="continuebutton">
+            <Link to="/profile" className="continuebutton">
                 <h4>Got It!</h4>
             </Link>
             </div>
-        
         </section>
+        </div>
+        </article>
         </main>
+    
     )
 }

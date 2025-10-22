@@ -1,7 +1,3 @@
-// Albert og Bjarke har lavet den ved samarbejde om firebase Auth
-
-
-// src/CreateProfile.jsx
 import { useState } from "react";
 import "./profile.css";
 import { auth } from "/firebaseClient"; // from Step 2
@@ -50,8 +46,9 @@ async function onSubmit(e) {
 }
 
   return (
-    <main>
-      
+    <main className="ProfileBackground" >
+      <section className="logincon">
+      <div className="rulecontainer program-icons reveal stagger">
       <div className="logo">
         <section className="logocon">
         <img
@@ -98,7 +95,8 @@ async function onSubmit(e) {
       </div>
       </form>
 
-      
+      </div>
+      </section>
     </main>
   
 

@@ -61,8 +61,9 @@ async function onSubmit(e) {
 }
 
   return (
-    <main>
-      
+    <main className="ProfileBackground">
+      <section className="logincon">
+        <div className="rulecontainer program-icons reveal stagger">
       <div className="logo">
         <section className="logocon">
         <img
@@ -117,7 +118,8 @@ async function onSubmit(e) {
       </div>
       </form>
 
-      
+      </div>
+      </section>
     </main>
   
 
