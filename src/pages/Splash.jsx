@@ -18,7 +18,7 @@ export default function Splash() {
       <div className="flex flex-col items-center">
         <img
           className="size-[80vw]"
-          src="/img/GameSquareLogo2.svg"
+          src={import.meta.env.BASE_URL + "/img/GameSquareLogo2.svg"}
           alt="GameSquare Logo"
         />
         <h1>Loading...</h1>
