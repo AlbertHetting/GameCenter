@@ -16,7 +16,7 @@ export default function ButtonJoinGame({ onClick }) {
           Join Game
         </h1>
         <img
-          src="/img/arrow-right-white.svg"
+          src={import.meta.env.BASE_URL + "/img/arrow-right-white.svg"}
           alt="white arrow pointing right"
         />
       </div>
