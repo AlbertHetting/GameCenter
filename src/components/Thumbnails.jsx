@@ -13,7 +13,7 @@ export default function Thumbnails({ game }) {
     >
       {/* Background image */}
       <img
-        src={game.background}
+        src={import.meta.env.BASE_URL + game.background}
         alt={game.title}
         className="absolute inset-0 w-full h-full object-cover"
       />

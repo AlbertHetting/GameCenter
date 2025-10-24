@@ -14,7 +14,7 @@ export default function Join() {
       <section className="joincon">
         <div>
             <Link to="/browse">
-            <img className="backspace" src="/img/BackSpace.png" alt="Return" />
+            <img className="backspace" src={import.meta.env.BASE_URL + "/img/BackSpace.png"} alt="Return" />
             </Link>
         </div>
 
@@ -27,7 +27,7 @@ export default function Join() {
       <div className="logo-game">
         <section className="logocon-join-game">
         <img
-          src="/img/GameSquareLogo2.svg"
+          src={import.meta.env.BASE_URL + "/img/GameSquareLogo2.svg"}
           alt="GameSquare Logo"
         />
         <h1>Use the join code</h1>
