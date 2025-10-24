@@ -1,0 +1,143 @@
+.lobbybackground {
+  margin: 0;
+  display: flex; /* flex */
+  flex-direction: column; /* flex-col */
+  height: 100vh; /* h-screen */
+  width: 100vw; /* w-screen */
+  justify-content: space-around; /* justify-around */
+  align-items: center; /* items-center */
+
+  background-image: url("/img/GameBackground.png"); /* bg-[url(...)] */
+  background-size: cover; /* bg-cover */
+  background-position: center; /* bg-center */
+  background-repeat: no-repeat;
+}
+
+
+#gamelobby{
+    margin-top: -2rem;
+}
+
+.logomysterycon{
+    display: flex;
+    justify-content: center;
+}
+
+.logomystery{
+    max-width: 20rem;
+}
+
+.lobbycode h2{
+font-family: "inter", sans-serif;
+background-image: linear-gradient(90deg,rgba(157, 129, 137, 1) 0%, rgba(216, 226, 220, 1) 100%);
+color: transparent;
+background-clip: text;
+text-align: center;
+font-weight: 700;
+font-size: 21px;
+}
+
+.lobbycode h1{
+font-family: "inter", sans-serif;
+background-image: linear-gradient(90deg,rgba(157, 129, 137, 1) 0%, rgba(216, 226, 220, 1) 100%);
+color: transparent;
+background-clip: text;
+text-align: center;
+font-weight: 900;
+font-size: 48px;
+}
+
+#playercon h1{
+    margin-top: 0.2rem;
+    font-family: "inter", sans-serif;
+    color: white;
+    text-align: center;
+    font-size: 32px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+
+#players{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)); /* 3 per row */
+  gap: 0rem;
+  max-width: 27rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+ 
+}
+
+
+.playerindividual h3{
+    text-align: center;
+    color: #F4ACB7;
+    font-family: "inter", sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+}
+
+
+.StartCon {
+  display: flex;
+  justify-content: center;
+}
+
+
+.Startbutton {
+  margin-top: 0.3rem;
+  height: 3.5rem;
+  width: 14rem;
+  border-radius: 13px;
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(90deg,rgba(255, 202, 212, 1) 0%, rgba(244, 172, 183, 1) 100%);
+
+  /* no background and no mix-blend-mode here */
+}
+
+.Startbutton h4 {
+font-family:"inter", sans-serif;
+color: white;
+font-size: 28px;
+}
+
+#startinggame h5{
+    font-family: "inter", sans-serif;
+    font-weight: 500;
+    color: white;
+    font-style: italic;
+    text-align: center;
+}
+
+#startinggame{
+    margin-top: 1rem;
+}
+
+
+
+#introvideo {
+  display: none;               /* hidden by default */
+  position: fixed;             /* make it fill the screen above everything */
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;           /* cover the viewport */
+  background: black;           /* avoid white flashes */
+  z-index: 9999;
+}
+
+#introvideo.is-visible {
+  display: block;
+}
+
+
+.is-hidden {
+  display: none !important;
+}
+
+.lobbybackground {
+  position: relative;
+  min-height: 100dvh;
+}

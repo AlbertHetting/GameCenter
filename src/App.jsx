@@ -5,6 +5,7 @@ import Profile from "./pages/Profile";
 import Browse from "./pages/Browse";
 import LoginProfileMain from "./pages/LoginProfileMain";
 import JoinGame from "./pages/JoinGameCode";
+import Lobby from "./pages/Lobby";
 import RequireAuth from "./components/RequireAuth";
 
 export default function App() {
@@ -18,6 +19,7 @@ export default function App() {
           <Route path="login" element={<LoginProfileMain />} />
           <Route path="/browse" element={<RequireAuth> <Browse /> </RequireAuth>}/>
           <Route path="/join" element={<RequireAuth> <JoinGame /> </RequireAuth>}/>
+          <Route path="/Lobby" element={<RequireAuth> <Lobby /> </RequireAuth>}/>
         </Routes>
       </main>
     </>
