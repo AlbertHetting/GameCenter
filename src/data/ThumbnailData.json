@@ -2,7 +2,7 @@
   {
     "title": "Mystery Bowl",
     "description": "Ala charades",
-    "background": "/img/BackgroundMysterBox.svg",
+    "background": "{import.meta.env.BASE_URL + '/img/BackgroundMysterBox.svg'}",
     "players": "2-10",
     "timer": "20 min.",
     "link": "mystery-bowl"
@@ -10,7 +10,7 @@
   {
     "title": "Mind Game",
     "description": "Ala wavelength",
-    "background": "/img/BackgroundMind.svg",
+    "background": "{import.meta.env.BASE_URL + '/img/BackgroundMind.svg'}",
     "players": "2-5",
     "timer": "15 min.",
     "link": "mind-game"
@@ -18,7 +18,7 @@
   {
     "title": "Detective D",
     "description": "Ala among us",
-    "background": "/img/BackgroundDetective.svg",
+    "background": "{import.meta.env.BASE_URL + '/img/BackgroundDetective.svg'}",
     "players": "2-10",
     "timer": "5 min.",
     "link": "detective-d"
@@ -26,7 +26,7 @@
   {
     "title": "Be a fool",
     "description": "Ala quiplash",
-    "background": "/img/BackgroundFool.svg",
+    "background": "{import.meta.env.BASE_URL + '/img/BackgroundFool.svg'}",
     "players": "2-4",
     "timer": "10 min.",
     "link": "be-a-fool"

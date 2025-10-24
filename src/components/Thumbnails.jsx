@@ -30,14 +30,14 @@ export default function Thumbnails({ game }) {
 
         <div className="w-16 h-6 bg-white rounded-xl flex justify-center items-center">
           <div className="flex items-center gap-1">
-            <img src="/img/icon-persons.svg" alt="Players" />
+            <img src={import.meta.env.BASE_URL + "/img/icon-persons.svg"} alt="Players" />
             <p className="text-xs font-bold font-['Inter']">{game.players}</p>
           </div>
         </div>
 
         <div className="w-20 h-6 bg-white rounded-xl flex justify-center items-center mt-1">
           <div className="flex items-center gap-1">
-            <img src="/img/icon-timer.svg" alt="Timer" />
+            <img src={import.meta.env.BASE_URL + "/img/icon-timer.svg"} alt="Timer" />
             <p className="text-xs font-bold font-['Inter']">{game.timer}</p>
           </div>
         </div>

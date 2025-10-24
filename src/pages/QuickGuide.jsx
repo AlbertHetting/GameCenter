@@ -13,7 +13,7 @@ export default function QuickGuide(){
         
         <div className="conceptheader">
         <div className="conceptcon" >
-        <img className="Concept" src="/img/Concept.png" alt="" />
+        <img className="Concept" src={import.meta.env.BASE_URL + "/img/Concept.png"} alt="" />
         </div>
 
         <div className="textcon">

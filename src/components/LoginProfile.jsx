@@ -52,7 +52,7 @@ async function onSubmit(e) {
       <div className="logo">
         <section className="logocon">
         <img
-          src="/img/GameSquareLogo2.svg"
+          src={import.meta.env.BASE_URL + "/img/GameSquareLogo2.svg"}
           alt="GameSquare Logo"
         />
         <h1>You seem familiar - welcome back!</h1>

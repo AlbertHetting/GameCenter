@@ -7,7 +7,7 @@ export default function Browse() {
       <div className="logo">
         <section className="logocon flex flex-col items-center gap-4">
           <img
-            src="/img/GameSquareLogo2.svg"
+            src={import.meta.env.BASE_URL + "/img/GameSquareLogo2.svg"}
             alt="GameSquare Logo"
             className="w-40 h-20"
           />

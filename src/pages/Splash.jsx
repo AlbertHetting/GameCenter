@@ -25,7 +25,7 @@ export default function Splash() {
       </div>
 
       <div>
-        <img src="/img/PlayingCards.png" alt="Playing cards" />
+        <img src={ import.meta.env.BASE_URL + "/img/PlayingCards.png" alt="Playing cards"} />
       </div>
 
       <div>
