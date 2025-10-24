@@ -11,6 +11,7 @@ export default function Browse() {
             alt="GameSquare Logo"
             className="w-40 h-20"
           />
+          v
           <h1 className="w-48 h-7 text-center justify-start text-white text-2xl font-medium font-['Inter']">
             Pick your poison
           </h1>

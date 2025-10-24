@@ -6,7 +6,7 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig(({ command }) => {
   const config = {
     plugins: [react(), tailwindcss()],
-    base: "/",
+    base: "/GameCenter/",
   };
 
   // Change base path when building for production
