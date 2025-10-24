@@ -21,15 +21,22 @@ export default function Splash() {
           src={import.meta.env.BASE_URL + "/img/GameSquareLogo2.svg"}
           alt="GameSquare Logo"
         />
-        <h1>Loading...</h1>
+        <h1 className="text-center justify-start text-white text-2xl font-bold font-['Inter']">
+          Loading...
+        </h1>
       </div>
 
       <div>
-        <img src={ import.meta.env.BASE_URL + "/img/PlayingCards.png"} alt="Playing cards" />
+        <img
+          src={import.meta.env.BASE_URL + "/img/PlayingCards.png"}
+          alt="Playing cards"
+        />
       </div>
 
       <div>
-        <h1>Did you know...</h1>
+        <h1 className="text-center justify-start text-white text-2xl font-semi font-['Inter'] italic">
+          did you know... <br /> getting points makes you win?
+        </h1>
       </div>
 
       <div className="text-center text-white text-sm font-bold font-['Inter']">
