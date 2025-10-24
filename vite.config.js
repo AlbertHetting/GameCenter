@@ -9,10 +9,10 @@ export default defineConfig(({ command }) => {
     base: "/GameCenter/",
   };
 
-  /* // Change base path when building for production
+  // Change base path when building for production
   if (command !== "serve") {
     config.base = "/GameCenter/"; // 👈 Replace with your GitHub repository name
-  } */
+  }
 
   return config;
 });
