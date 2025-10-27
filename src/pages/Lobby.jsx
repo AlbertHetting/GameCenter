@@ -73,10 +73,6 @@ export default function Lobby() {
           </section>
         </section>
       </section>
-
-    
-
-
     
       <video
         id="introvideo"

@@ -26,7 +26,7 @@
 
 .TimerCon h1{
   color: white;
-  font-family: "inter", sans-serif;
+  font-family: "poppins", sans-serif;
   font-size: 37px;
   font-weight: 600;
 }
@@ -35,8 +35,8 @@
     max-width: 2.5rem;
 }
 
-.WaitInstruction h2, h1{
-    font-family: "inter", sans-serif ;
+.WaitInstruction h2 {
+    font-family: "poppins", sans-serif ;
     color: white;
     font-size: 37px;
     font-weight: 800;
@@ -64,7 +64,7 @@ max-width: 15rem;
 }
 
 #TipText{
-    font-family: "inter", sans-serif;
+    font-family: "poppins", sans-serif;
     color: white;
     text-align: center;
     max-width: 20rem;

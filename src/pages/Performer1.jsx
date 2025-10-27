@@ -10,7 +10,7 @@ export default function Performer1() {
   }, []);
 
   return (
-    <main className="w-screen h-screen bg-[url(/img/BackgroundPastel.svg)] bg-cover flex flex-col items-center">
+    <main className="w-screen h-screen bg-[url(/img/BackgroundPastel.svg)] bg-cover flex flex-col items-center pt-[-4rem] pb-[4rem]">
       <div className=" text-white text-4xl font-semibold font-['Poppins'] flex mt-20 justify-center">
         <div>
           <p>20</p>

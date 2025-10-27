@@ -26,16 +26,18 @@
 
 #lucktext h1{
     margin-top: -1rem;
-    font-family: "inter", sans-serif;
+    font-family: "poppins", sans-serif;
     font-size: 18px;
-    font-weight: 300;
+    font-weight: 500;
+    color: white;
+    font-style: italic;
 }
 
 
 .avatar-container{
     width: 10rem;
     height: 10rem;
-    font-family: "inter", sans-serif;
+    font-family: "poppins", sans-serif;
     font-size: 18px;
     font-weight: 700;
     color:white;
@@ -88,7 +90,7 @@
 }
 
 .BackbuttonEnd h4 {
-font-family:"inter", sans-serif;
+font-family:"poppins", sans-serif;
 color: white;
 font-size: 24px;
 }
