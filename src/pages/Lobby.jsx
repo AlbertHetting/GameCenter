@@ -1,66 +1,83 @@
 import "./Lobbystyle.css";
-import { useRef, useState } from "react";
-import { Navigate } from "react-router";
-// If you need navigation after video ends, import useNavigate from react-router-dom
+import { useEffect, useRef, useState } from "react";
+import { useParams, useNavigate } from "react-router";
+import { auth, db } from "/firebaseClient";
+import { ref, set, onValue, off } from "firebase/database";
 
 export default function Lobby() {
+  const { code } = useParams();             // /room/:code
+  const navigate = useNavigate();
+
   const videoRef = useRef(null);
   const [showVideo, setShowVideo] = useState(false);
+  const [players, setPlayers] = useState({}); // { uid: name }
+
+  // Put myself into the players list when I land in the room
+  useEffect(() => {
+    const u = auth.currentUser;
+    if (!u || !code) return;
+    const name = u.displayName || "Player";
+    set(ref(db, `rooms/${code}/players/${u.uid}`), name);
+  }, [code]);
+
+  // Subscribe to players live
+  useEffect(() => {
+    if (!code) return;
+    const playersRef = ref(db, `rooms/${code}/players`);
+    const unsub = onValue(playersRef, (snap) => {
+      setPlayers(snap.val() || {});
+    });
+    return () => off(playersRef, "value", unsub);
+  }, [code]);
 
   const handleStart = async (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
     const v = videoRef.current;
     if (!v) return;
-
-    // Show video / hide lobby first so it’s clear something happened
     setShowVideo(true);
-
     try {
-      v.muted = false;          
-      v.currentTime = 0;        
-      await v.play();           
+      v.muted = false;
+      v.currentTime = 0;
+      await v.play();
+      // Optionally update room state so other clients can react:
+      // set(ref(db, `rooms/${code}/state`), "introVideo");
     } catch (err) {
       console.error("Video play failed:", err);
-
     }
   };
 
   const handleEnded = () => {
-    Navigate("/"); 
+    navigate("/performer1"); // go to next part of the game
   };
 
   return (
     <main className="lobbybackground">
       <section id="gamelobby" className={showVideo ? "is-hidden" : ""}>
         <div className="logomysterycon">
-          <img className="logomystery" src={import.meta.env.BASE_URL + "/img/MysteryBowl.png"} alt="" />
+          <img
+            className="logomystery"
+            src={import.meta.env.BASE_URL + "/img/MysteryBowl.png"}
+            alt=""
+          />
         </div>
 
         <section className="lobbycode">
           <h2>Room Code:</h2>
-          <h1>KCPT78</h1>
+          <h1>{code}</h1> {/* show the real code from URL */}
         </section>
 
         <section id="playerconLobby">
           <h1 id="PlayerText">Players</h1>
-
           <div id="players">
-            <div className="playerindividual">
-              <img src={import.meta.env.BASE_URL + "/img/ChibiCapybara.png"} alt="" />
-              <h3>Albert</h3>
-            </div>
-            <div className="playerindividual">
-              <img src={import.meta.env.BASE_URL + "/img/ChibiKitty.png"} alt="" />
-              <h3>Clara</h3>
-            </div>
-            <div className="playerindividual">
-              <img src={import.meta.env.BASE_URL + "/img/ChibiPanda.png"} alt="" />
-              <h3>Bjarke</h3>
-            </div>
-            <div className="playerindividual">
-              <img src={import.meta.env.BASE_URL + "/img/ChibiWhale.png"} alt="" />
-              <h3>Oliver</h3>
-            </div>
+            {Object.entries(players).map(([uid, name]) => (
+              <div className="playerindividual" key={uid}>
+                <img
+                  src={import.meta.env.BASE_URL + "/img/ChibiCapybara.png"}
+                  alt=""
+                />
+                <h3>{name}</h3>
+              </div>
+            ))}
           </div>
 
           <section id="startinggame">
@@ -73,14 +90,14 @@ export default function Lobby() {
           </section>
         </section>
       </section>
-    
+
       <video
         id="introvideo"
         className={showVideo ? "is-visible" : ""}
         ref={videoRef}
         src={import.meta.env.BASE_URL + "/videos/VideoIntro.mp4"}
-        playsInline           
-        preload="auto"        
+        playsInline
+        preload="auto"
         onEnded={handleEnded}
       />
     </main>

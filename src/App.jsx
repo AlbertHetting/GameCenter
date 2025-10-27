@@ -25,7 +25,7 @@ export default function App() {
           <Route path="login" element={<LoginProfileMain />} />
           <Route path="/browse" element={<RequireAuth> <Browse /> </RequireAuth>}/>
           <Route path="/join" element={<RequireAuth> <JoinGame /> </RequireAuth>}/>
-          <Route path="/Lobby" element={<RequireAuth> <Lobby /> </RequireAuth>}/>
+           <Route path="/room/:code" element={ <RequireAuth> <Lobby /> </RequireAuth>}/>
           <Route path="/Standby" element={<RequireAuth> <Wait /> </RequireAuth>}/>
           <Route path="/GuessingPlayer" element={<RequireAuth> <Guessing /> </RequireAuth>}/>
           <Route path="/performer1" element={<RequireAuth>{" "} <Performer1 />{" "}</RequireAuth>}/>

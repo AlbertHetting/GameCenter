@@ -109,7 +109,7 @@ async function onSubmit(e) {
         {formError && <p style={{ color: "crimson" }}>{formError}</p>}
         {formSuccess && <p style={{ color: "green" }}>{formSuccess}</p>}
 
-<div className="button-container">
+      <div className="button-container">
         <ButtonSignup type="submit"/>
 
         <h4 className="text-center font-semi text-white">Already have a <br /> user?</h4>
