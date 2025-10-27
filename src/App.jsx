@@ -7,6 +7,8 @@ import LoginProfileMain from "./pages/LoginProfileMain";
 import JoinGame from "./pages/JoinGameCode";
 import Lobby from "./pages/Lobby";
 import RequireAuth from "./components/RequireAuth";
+import Wait from "./pages/Waitscreen";
+import Guessing from "./pages/Guessing";
 
 export default function App() {
   return (
@@ -20,6 +22,8 @@ export default function App() {
           <Route path="/browse" element={<RequireAuth> <Browse /> </RequireAuth>}/>
           <Route path="/join" element={<RequireAuth> <JoinGame /> </RequireAuth>}/>
           <Route path="/Lobby" element={<RequireAuth> <Lobby /> </RequireAuth>}/>
+          <Route path="/Standby" element={<RequireAuth> <Wait /> </RequireAuth>}/>
+          <Route path="/GuessingPlayer" element={<RequireAuth> <Guessing /> </RequireAuth>}/>
         </Routes>
       </main>
     </>
