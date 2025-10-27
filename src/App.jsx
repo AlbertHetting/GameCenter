@@ -9,6 +9,7 @@ import Lobby from "./pages/Lobby";
 import RequireAuth from "./components/RequireAuth";
 import Performer1 from "./pages/Performer1";
 import Performer2 from "./pages/Performer2";
+import RoundWinner from "./pages/RoundWinner";
 
 export default function App() {
   return (
@@ -52,6 +53,15 @@ export default function App() {
               <RequireAuth>
                 {" "}
                 <Performer2 />{" "}
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/round-winner"
+            element={
+              <RequireAuth>
+                {" "}
+                <RoundWinner />{" "}
               </RequireAuth>
             }
           />
