@@ -1,10 +1,20 @@
 import { useNavigate } from "react-router";
-export default function Thumbnails({ game }) {
-  const navigate = useNavigate(); // initialize navigation hook
+import { createRoom } from "/rooms"; // NEW import
 
-  function handleClick() {
-    navigate(`/game/${game.link}`); // navigate to game detail page
+
+export default function Thumbnails({ game }) {
+  const navigate = useNavigate();
+
+  async function handleClick() {
+    if (game.link === "mystery-bowl") {
+      const code = await createRoom();
+      navigate(`/room/${code}`);
+    } else {
+      navigate(`/game/${game.link}`);
+    }
   }
+
+
 
   return (
     <button
