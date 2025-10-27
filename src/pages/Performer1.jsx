@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import WordCard from "../components/WordCard";
 import WordCardData from "../data/WordCardData";
 
-export default function Performer() {
+export default function Performer1() {
   // Pick 3 random cards once per component mount
   const randomCards = useMemo(() => {
     const shuffled = [...WordCardData].sort(() => Math.random() - 0.5);

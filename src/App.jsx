@@ -6,7 +6,8 @@ import Browse from "./pages/Browse";
 import LoginProfileMain from "./pages/LoginProfileMain";
 import JoinGame from "./pages/JoinGameCode";
 import RequireAuth from "./components/RequireAuth";
-import Performer from "./pages/Performer";
+import Performer1 from "./pages/Performer1";
+import Performer2 from "./pages/Performer2";
 
 export default function App() {
   return (
@@ -36,11 +37,20 @@ export default function App() {
             }
           />
           <Route
-            path="/performer"
+            path="/performer1"
             element={
               <RequireAuth>
                 {" "}
-                <Performer />{" "}
+                <Performer1 />{" "}
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/performer2"
+            element={
+              <RequireAuth>
+                {" "}
+                <Performer2 />{" "}
               </RequireAuth>
             }
           />
