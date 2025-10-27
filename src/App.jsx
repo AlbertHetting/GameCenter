@@ -12,6 +12,7 @@ import Guessing from "./pages/Guessing";
 import Performer1 from "./pages/Performer1";
 import Performer2 from "./pages/Performer2";
 import RoundWinner from "./pages/RoundWinner";
+import GameEnd from "./pages/Gameend";
 
 export default function App() {
   return (
@@ -72,6 +73,8 @@ export default function App() {
               </RequireAuth>
             }
           />
+           <Route path="/GameEnd" element={<RequireAuth> <GameEnd /> </RequireAuth>}/>
+
         </Routes>
       </main>
     </>

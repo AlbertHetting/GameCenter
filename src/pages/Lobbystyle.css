@@ -4,7 +4,6 @@
   flex-direction: column; /* flex-col */
   height: 100vh; /* h-screen */
   width: 100vw; /* w-screen */
-  justify-content: space-around; /* justify-around */
   align-items: center; /* items-center */
 
   background-image: url("/img/GameBackground.png"); /* bg-[url(...)] */
@@ -15,7 +14,7 @@
 
 
 #gamelobby{
-    margin-top: -2rem;
+    margin-top: 1rem;
 }
 
 .logomysterycon{
@@ -25,6 +24,13 @@
 
 .logomystery{
     max-width: 20rem;
+}
+
+.lobbycode {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .lobbycode h2{
@@ -45,16 +51,14 @@ background-clip: text;
 text-align: center;
 font-weight: 900;
 font-size: 48px;
+
 }
 
-#playercon h1{
-    margin-top: 0.2rem;
-    font-family: "inter", sans-serif;
-    color: white;
-    text-align: center;
-    font-size: 32px;
-    font-weight: 500;
-    text-transform: uppercase;
+
+
+
+#PlayerText{
+
 }
 
 

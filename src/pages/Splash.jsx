@@ -14,8 +14,8 @@ export default function Splash() {
   }, [navigate]); */
 
   return (
-    <main className="bg-[url('/img/Background1.png')] flex flex-col h-screen w-screen justify-around items-center bg-cover bg-center">
-      <div className="flex flex-col items-center">
+    <main className="bg-[url('/img/Background1.png')] flex flex-col h-screen w-screen justify-evenly items-center bg-cover bg-center">
+      <div className="flex flex-col items-center mt-[-4rem]">
         <img
           className="size-[80vw]"
           src={import.meta.env.BASE_URL + "/img/GameSquareLogo2.svg"}
@@ -34,12 +34,12 @@ export default function Splash() {
       </div>
 
       <div>
-        <h1 className="text-center justify-start text-white text-2xl font-semi font-['Inter'] italic">
+        <h4 className="text-center justify-start text-white text-2xl font-semi font-['Inter'] italic">
           did you know... <br /> getting points makes you win?
-        </h1>
+        </h4>
       </div>
 
-      <div className="text-center text-white text-sm font-bold font-['Inter']">
+      <div className="text-center text-white text-sm font-bold font-['Inter'] mb-[1rem]">
         ®GameSquare 2025
       </div>
     </main>
