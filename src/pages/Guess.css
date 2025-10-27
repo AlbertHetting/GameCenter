@@ -14,7 +14,16 @@
 
 
 .GuessInstruction h1, h2{
-    font-family: "inter", sans-serif ;
+    font-family: "poppins", sans-serif ;
+    color: white;
+    font-size: 37px;
+    font-weight: 800;
+    max-width: 21rem;
+    text-align: center;
+}
+
+.GuessInstruction h2{
+    font-family: "poppins", sans-serif ;
     color: white;
     font-size: 37px;
     font-weight: 800;
@@ -31,7 +40,6 @@
 .GuessInstruction{
     margin-top: 5rem;
 }
-
 
 
 
@@ -55,7 +63,7 @@ flex-shrink: 0;
 .input-area-guess::placeholder{
 font-size: 21px;
 text-align: center;
-font-family: "Inter" sans-serif;
+font-family: "poppins" sans-serif;
 color: rgb(255, 255, 255);
 }
 
@@ -63,7 +71,7 @@ color: rgb(255, 255, 255);
 text-align: center;
 font-size: 28px;
 border: 2px white;
-font-family: "Inter" sans-serif;
+font-family: "poppins" sans-serif;
 font-weight: 500;
 color: white;
 font-style: italic;
@@ -98,7 +106,7 @@ align-items: center;
 
 .SubmitGuess h4{
     text-align: center;
-    font-family: "inter", sans-serif;
+    font-family: "poppins", sans-serif;
     color: white;
 
 }
@@ -107,14 +115,14 @@ align-items: center;
 #category h5{
 margin-top: 3rem;
     font-size: 24px;
-    font-family: "inter", sans-serif;
+    font-family: "poppins", sans-serif;
     color: #F4ACB7;
     font-weight: 500;
 }
 
 #GameTipsText{
     margin-top: 2rem;
-    font-family: "inter", sans-serif;
+    font-family: "poppins", sans-serif;
     color: white;
     max-width: 25rem;
     text-align: center;

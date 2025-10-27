@@ -9,7 +9,7 @@ export default function Browse() {
           <img
             src={import.meta.env.BASE_URL + "/img/GameSquareLogo2.svg"}
             alt="GameSquare Logo"
-            className="w-40 h-20"
+            className="w-80 h-40"
           />
           <h1 className="w-48 h-7 text-center justify-start text-white text-2xl font-medium font-['Inter']">
             Pick your poison

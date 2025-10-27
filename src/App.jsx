@@ -12,6 +12,7 @@ import Guessing from "./pages/Guessing";
 import Performer1 from "./pages/Performer1";
 import Performer2 from "./pages/Performer2";
 import RoundWinner from "./pages/RoundWinner";
+import GameEnd from "./pages/Gameend";
 
 export default function App() {
   return (
@@ -27,35 +28,8 @@ export default function App() {
           <Route path="/Lobby" element={<RequireAuth> <Lobby /> </RequireAuth>}/>
           <Route path="/Standby" element={<RequireAuth> <Wait /> </RequireAuth>}/>
           <Route path="/GuessingPlayer" element={<RequireAuth> <Guessing /> </RequireAuth>}/>
-          <Route
-            path="/browse"
-            element={
-              <RequireAuth>
-                {" "}
-                <Browse />{" "}
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/join"
-            element={
-              <RequireAuth>
-                {" "}
-                <JoinGame />{" "}
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/performer1"
-            element={
-              <RequireAuth>
-                {" "}
-                <Performer1 />{" "}
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/performer2"
+          <Route path="/performer1" element={<RequireAuth>{" "} <Performer1 />{" "}</RequireAuth>}/>
+          <Route path="/performer2"
             element={
               <RequireAuth>
                 {" "}
@@ -72,6 +46,8 @@ export default function App() {
               </RequireAuth>
             }
           />
+           <Route path="/GameEnd" element={<RequireAuth> <GameEnd /> </RequireAuth>}/>
+
         </Routes>
       </main>
     </>

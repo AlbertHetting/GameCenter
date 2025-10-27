@@ -41,8 +41,8 @@ export default function Lobby() {
           <h1>KCPT78</h1>
         </section>
 
-        <section id="playercon">
-          <h1>Players</h1>
+        <section id="playerconLobby">
+          <h1 id="PlayerText">Players</h1>
 
           <div id="players">
             <div className="playerindividual">
@@ -73,10 +73,6 @@ export default function Lobby() {
           </section>
         </section>
       </section>
-
-    
-
-
     
       <video
         id="introvideo"
