@@ -1,0 +1,78 @@
+.WaitBackground {
+  margin: 0;
+  display: flex; /* flex */
+  flex-direction: column; /* flex-col */
+  height: 100vh; /* h-screen */
+  width: 100vw; /* w-screen */
+  align-items: center; /* items-center */
+
+  background-image: url("/img/GameBackground.png"); /* bg-[url(...)] */
+  background-size: cover; /* bg-cover */
+  background-position: center; /* bg-center */
+  background-repeat: no-repeat;
+}
+
+
+
+
+.TimerCon{
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+
+.TimerCon h1{
+  color: white;
+  font-family: "inter", sans-serif;
+  font-size: 37px;
+  font-weight: 600;
+}
+
+.Timer{
+    max-width: 2.5rem;
+}
+
+.WaitInstruction h2, h1{
+    font-family: "inter", sans-serif ;
+    color: white;
+    font-size: 37px;
+    font-weight: 800;
+    max-width: 20rem;
+    text-align: center;
+
+}
+
+
+.WaitInstruction{
+    margin-top: 8rem;
+
+
+}
+
+
+#WaitPlayer{
+    margin-top: 0rem;
+    display: flex;
+    justify-content: center;
+}
+
+#WaitPlayer img{
+max-width: 15rem;
+}
+
+#TipText{
+    font-family: "inter", sans-serif;
+    color: white;
+    text-align: center;
+    max-width: 20rem;
+    font-style: italic;
+    font-size: 20px;
+}
+
+
+.player-name{
+    color: #F4ACB7 ;
+}
