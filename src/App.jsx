@@ -5,6 +5,7 @@ import Profile from "./pages/Profile";
 import Browse from "./pages/Browse";
 import LoginProfileMain from "./pages/LoginProfileMain";
 import JoinGame from "./pages/JoinGameCode";
+import Lobby from "./pages/Lobby";
 import RequireAuth from "./components/RequireAuth";
 import Performer1 from "./pages/Performer1";
 import Performer2 from "./pages/Performer2";
