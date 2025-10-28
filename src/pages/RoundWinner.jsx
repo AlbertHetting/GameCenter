@@ -4,7 +4,7 @@ import { db } from "/firebaseClient";
 import { ref, onValue, off } from "firebase/database";
 import WordCardData from "../data/WordCardData.json";
 import chibis from "../data/Images.json";
-import { advanceOrEnd, startPickPhase } from "/game";
+import { advanceOrEnd, startPickPhase } from "../game";
 
 export default function RoundWinner() {
   const { code } = useParams();

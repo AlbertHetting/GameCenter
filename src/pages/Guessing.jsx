@@ -4,7 +4,7 @@ import { useParams, useNavigate } from "react-router";
 import { auth, db } from "/firebaseClient";
 import { ref, onValue, off } from "firebase/database";
 import WordCardData from "../data/WordCardData.json";
-import { trySetWinnerAndScore } from "/game";
+import { trySetWinnerAndScore } from "../game";
 
 export default function Guessing() {
   const { code } = useParams();

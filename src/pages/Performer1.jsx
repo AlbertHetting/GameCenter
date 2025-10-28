@@ -1,13 +1,12 @@
-import { useEffect, useMemo, useState } from "react";
-import { auth, db } from "/firebaseClient";
+import { useEffect, useState } from "react";
+import { auth, db } from "/firebaseClient"; // adjust path if needed
 import { useParams, useNavigate } from "react-router";
 import { ref, onValue, off } from "firebase/database";
 import WordCard from "../components/WordCard";
-import Method from "../components/Method";   // ✅ import the component
-import WordCardData from "../data/WordCardData";
-import MethodData from "../data/MethodData.json"; // ✅ import the JSON data
-import { startGuessPhase } from "/game";
-
+import Method from "../components/Method";
+import WordCardData from "../data/WordCardData.json";  // ✅ JSON
+import MethodData from "../data/MethodData.json";       // ✅ JSON
+import { startGuessPhase } from "../game";               // ✅ shared game helper
 
 export default function Performer1() {
   const { code } = useParams();
@@ -15,7 +14,7 @@ export default function Performer1() {
   const me = auth.currentUser?.uid;
 
   const [performerUid, setPerformerUid] = useState(null);
-  const [cardsIdx, setCardsIdx] = useState([]);      // [i,j,k]
+  const [cardsIdx, setCardsIdx] = useState([]); // [i,j,k]
   const [methodIdx, setMethodIdx] = useState(null);
   const [pickEndsAt, setPickEndsAt] = useState(null);
   const [phase, setPhase] = useState(null);
@@ -48,30 +47,26 @@ export default function Performer1() {
   }, [phase, code, navigate]);
 
   const methodObj = methodIdx != null ? MethodData[methodIdx] : null;
-  const cardObjs = cardsIdx.map((i) => WordCardData[i]);
+  const cardObjs = cardsIdx.map((i) => WordCardData[i]).filter(Boolean);
 
-  // 20s countdown & auto-pick
+  // 20s countdown & auto-pick (if user doesn't choose)
   useEffect(() => {
     if (!pickEndsAt) return;
+    if (phase !== "pick") return;
+    if (!performerUid || performerUid !== me) return;
+
+    const auto = async () => {
+      if (cardsIdx.length && methodIdx != null) {
+        await startGuessPhase(code, cardsIdx[0], methodIdx);
+        navigate(`/room/${code}/performer2`);
+      }
+    };
+
     const msLeft = pickEndsAt - Date.now();
-    if (msLeft <= 0) {
-      // auto-pick first card if nothing chosen
-      if (cardsIdx.length && methodIdx != null) {
-        startGuessPhase(code, cardsIdx[0], methodIdx).then(() => {
-          navigate(`/room/${code}/performer2`);
-        });
-      }
-      return;
-    }
-    const t = setTimeout(() => {
-      if (cardsIdx.length && methodIdx != null) {
-        startGuessPhase(code, cardsIdx[0], methodIdx).then(() => {
-          navigate(`/room/${code}/performer2`);
-        });
-      }
-    }, msLeft);
+    const GRACE_MS = 600; // small floor to avoid instant fire on first mount
+    const t = setTimeout(auto, Math.max(msLeft, GRACE_MS));
     return () => clearTimeout(t);
-  }, [pickEndsAt, cardsIdx, methodIdx, code, navigate]);
+  }, [pickEndsAt, phase, performerUid, me, cardsIdx, methodIdx, code, navigate]);
 
   const onPick = async (cardIndex) => {
     if (methodIdx == null) return;
@@ -79,11 +74,22 @@ export default function Performer1() {
     navigate(`/room/${code}/performer2`);
   };
 
+  const ready = methodObj && cardObjs.length === 3;
+
+  if (!ready) {
+    return (
+      <main className="w-screen h-screen bg-[url(/img/BackgroundPastel.svg)] bg-cover flex items-center justify-center">
+        <p className="text-white text-xl">Getting your prompt…</p>
+      </main>
+    );
+  }
+
   return (
     <main className="w-screen h-screen bg-[url(/img/BackgroundPastel.svg)] bg-cover flex flex-col items-center">
-      {/* timer UI (optional): show seconds remaining */}
-      {/* method */}
-      {methodObj && <Method data={methodObj} />}
+      {/* Method */}
+      <div className="w-96 h-20 text-center text-white text-base font-medium leading-6 italic mt-6">
+        {methodObj.method}
+      </div>
 
       {/* three cards to choose */}
       <div className="flex flex-wrap gap-4 justify-center mt-6">

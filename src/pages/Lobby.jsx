@@ -1,56 +1,17 @@
 import "./Lobbystyle.css";
 import { useEffect, useRef, useState } from "react";
 import { useParams, useNavigate } from "react-router";
-import { auth, db } from "/firebaseClient";
-import { ref, set, onValue, off, runTransaction, get, child } from "firebase/database";
+import { auth, db } from "/firebaseClient"; // adjust if your init lives elsewhere
+import {
+  ref,
+  onValue,
+  off,
+  runTransaction,
+  get,
+  child,
+} from "firebase/database";
 import chibis from "../data/Images.json";
-
-// ⬇️ tiny helper that starts the pick phase (choose performer + prompt)
-// If you already created startPickPhase in lib/game, import and use that instead.
-async function startPickPhaseInline(code) {
-  const roomRef = ref(db, `rooms/${code}`);
-  await runTransaction(roomRef, (room) => {
-    if (!room) return room;
-
-    // players map present?
-    const players = room.players || {};
-    const uids = Object.keys(players);
-    if (uids.length === 0) return room;
-
-    // pick performer: fewest performed (tie-break by uid)
-    let candidate = null;
-    let min = Infinity;
-    for (const uid of uids) {
-      const p = players[uid] || {};
-      const perf = Number.isInteger(p.performed) ? p.performed : 0;
-      if (perf < min || (perf === min && uid < candidate)) {
-        min = perf;
-        candidate = uid;
-      }
-    }
-
-    // 3 random cards (indexes) + 1 random method index
-    // NOTE: replace with your WordCardData/MethodData indexes later if desired
-    const random = (n) => Math.floor(Math.random() * n);
-    const threeIndexes = Array.from({ length: 3 }, () => random(20)); // placeholder range
-    const methodIndex = random(10); // placeholder range
-
-    const pickEndsAt = Date.now() + 20_000; // 20s to pick
-
-    return {
-      ...room,
-      phase: "pick",
-      performerUid: candidate,
-      prompt: {
-        cards: threeIndexes,
-        methodIndex,
-        choice: null,
-      },
-      timers: { ...(room.timers || {}), pickEndsAt },
-      round: room.round || 1,
-    };
-  });
-}
+import { startPickPhase } from "../game";
 
 export default function Lobby() {
   const { code } = useParams(); // /room/:code
@@ -74,7 +35,7 @@ export default function Lobby() {
     runTransaction(playersRef, (current) => {
       const list = current || {};
 
-      // 1) Normalize existing entries: "Albert" -> { name: "Albert", avatarIndex: null, joinedAt }
+      // 1) Normalize existing entries: "Albert" -> { name, avatarIndex: null, joinedAt }
       const normalized = {};
       const now = Date.now();
       for (const [uid, val] of Object.entries(list)) {
@@ -188,7 +149,7 @@ export default function Lobby() {
 
   const handleEnded = async () => {
     // ✅ Kick off the pick phase on the server, then the phase effect will route everyone
-    await startPickPhaseInline(code);
+    await startPickPhase(code);
   };
 
   // Stable rendering order: by avatarIndex (Capybara..Whale)
