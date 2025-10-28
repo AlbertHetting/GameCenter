@@ -23,7 +23,8 @@ export default function RoundWinner() {
   const winner = room?.winner || null;
   const players = room?.players || {};
   const wPlayer = winner?.uid ? players[winner.uid] : null;
-  const wImg = wPlayer?.avatarIndex != null ? chibis[wPlayer.avatarIndex]?.src : chibis[0].src;
+  const wImg =
+    wPlayer?.avatarIndex != null ? chibis[wPlayer.avatarIndex]?.src : chibis[0].src;
 
   // After 10s → advance or end
   useEffect(() => {
@@ -43,11 +44,12 @@ export default function RoundWinner() {
       startPickPhase(code);
     }
     if (room.phase === "pick") {
-      // back into the pick flow: Lobby routing already sends everyone
-      // But to be explicit, go to standby and let it redirect
+      // back into the pick flow
       navigate(`/room/${code}/standby`);
     }
   }, [room?.phase, code, navigate]);
+
+  const hasWinner = !!winner;
 
   return (
     <main className="w-screen h-screen bg-[url(/img/BackgroundPastel.svg)] bg-cover flex flex-col items-center justify-evenly">
@@ -56,18 +58,35 @@ export default function RoundWinner() {
         <span className="text-rose-300 text-4xl font-semibold">{word || "—"}</span>
       </div>
 
-      <div className="w-60 h-auto">
-        <img src={import.meta.env.BASE_URL + (wImg || "/img/ChibiCapybara.png")} alt="" />
-      </div>
+      {hasWinner ? (
+        <>
+          <div className="w-60 h-auto">
+            <img
+              src={import.meta.env.BASE_URL + (wImg || "/img/ChibiCapybara.png")}
+              alt=""
+            />
+          </div>
 
-      <div>
-        <div className="text-center text-rose-300 text-4xl font-extrabold">
-          {(winner?.name || "Someone").toUpperCase()}
-        </div>
-        <div className="text-center text-white text-4xl font-semibold">
-          Was the fastest
-        </div>
-      </div>
+          <div>
+            <div className="text-center text-rose-300 text-4xl font-extrabold">
+              {(winner?.name || "Someone").toUpperCase()}
+            </div>
+            <div className="text-center text-white text-4xl font-semibold">
+              Was the fastest!
+            </div>
+          </div>
+        </>
+      ) : (
+        <>
+          {/* No winner UI */}
+          <div className="text-center">
+            <div className="text-white text-4xl font-semibold">Time’s up!</div>
+            <div className="text-rose-300 text-2xl font-semibold mt-2">
+              No one got it — no points awarded.
+            </div>
+          </div>
+        </>
+      )}
     </main>
   );
 }
