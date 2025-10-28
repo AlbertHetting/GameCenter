@@ -44,8 +44,9 @@ export default function Lobby() {
         } else if (val && typeof val === "object") {
           normalized[uid] = {
             name: val.name || "Player",
-            avatarIndex:
-              Number.isInteger(val.avatarIndex) ? val.avatarIndex : null,
+            avatarIndex: Number.isInteger(val.avatarIndex)
+              ? val.avatarIndex
+              : null,
             joinedAt: typeof val.joinedAt === "number" ? val.joinedAt : now,
             score: Number.isInteger(val.score) ? val.score : 0,
             performed: Number.isInteger(val.performed) ? val.performed : 0,
@@ -64,8 +65,10 @@ export default function Lobby() {
         };
       } else {
         normalized[u.uid].name = u.displayName || "Player";
-        if (!Number.isInteger(normalized[u.uid].score)) normalized[u.uid].score = 0;
-        if (!Number.isInteger(normalized[u.uid].performed)) normalized[u.uid].performed = 0;
+        if (!Number.isInteger(normalized[u.uid].score))
+          normalized[u.uid].score = 0;
+        if (!Number.isInteger(normalized[u.uid].performed))
+          normalized[u.uid].performed = 0;
       }
 
       // 3) Compute which avatar indexes are already taken
@@ -147,6 +150,15 @@ export default function Lobby() {
     }
   };
 
+  // New handler for skipping video and starting the game
+  const handleSkipVideo = async () => {
+    try {
+      await startPickPhase(code); // kick off pick phase immediately
+    } catch (err) {
+      console.error("Failed to start game:", err);
+    }
+  };
+
   const handleEnded = async () => {
     // ✅ Kick off the pick phase on the server, then the phase effect will route everyone
     await startPickPhase(code);
@@ -191,8 +203,14 @@ export default function Lobby() {
           <section id="startinggame">
             <h5>Is the gang ready?</h5>
             <div className="StartCon">
-              <button className="Startbutton" onClick={handleStart}>
+              <button className="Startbutton" onClick={handleSkipVideo}>
                 <h4>Start Game!</h4>
+              </button>
+            </div>
+            <h5 className="mt-10">Need help?</h5>
+            <div className="StartCon">
+              <button className="Startbutton" onClick={handleStart}>
+                <h4>Watch video</h4>
               </button>
             </div>
           </section>
