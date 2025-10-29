@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
-import { auth, db } from "/firebaseClient"; // adjust path if needed
+import { useEffect, useRef, useState } from "react";
+import { auth, db } from "/firebaseClient";
 import { useParams, useNavigate } from "react-router";
 import { ref, onValue, off } from "firebase/database";
 import WordCard from "../components/WordCard";
 import Method from "../components/Method";
-import WordCardData from "../data/WordCardData.json";  // ✅ JSON
-import MethodData from "../data/MethodData.json";       // ✅ JSON
-import { startGuessPhase } from "../game";               // ✅ shared game helper
+import WordCardData from "../data/WordCardData.json";
+import MethodData from "../data/MethodData.json";
+import { startGuessPhase } from "../game";
 
 export default function Performer1() {
   const { code } = useParams();
@@ -16,8 +16,22 @@ export default function Performer1() {
   const [performerUid, setPerformerUid] = useState(null);
   const [cardsIdx, setCardsIdx] = useState([]); // [i,j,k]
   const [methodIdx, setMethodIdx] = useState(null);
-  const [pickEndsAt, setPickEndsAt] = useState(null);
+  const [pickEndsAt, setPickEndsAt] = useState(null); // ms epoch (written by host/client)
   const [phase, setPhase] = useState(null);
+
+  // 🔧 server time offset (ms), so Date.now() + offsetMs ≈ server time
+  const [offsetMs, setOffsetMs] = useState(0);
+
+  // subscribe server time offset once
+  useEffect(() => {
+    const offRef = ref(db, ".info/serverTimeOffset");
+    const unsub = onValue(offRef, (snap) => {
+      const v = snap.val();
+      // v is positive if client is behind, negative if ahead
+      setOffsetMs(typeof v === "number" ? v : 0);
+    });
+    return () => off(offRef, "value", unsub);
+  }, []);
 
   // subscribe prompt + performer + timers
   useEffect(() => {
@@ -49,27 +63,43 @@ export default function Performer1() {
   const methodObj = methodIdx != null ? MethodData[methodIdx] : null;
   const cardObjs = cardsIdx.map((i) => WordCardData[i]).filter(Boolean);
 
-  // 20s countdown & auto-pick (if user doesn't choose)
+  // 20s countdown & auto-pick (server-aligned)
+  const firedRef = useRef(false); // prevent double firing across renders
+
   useEffect(() => {
-    if (!pickEndsAt) return;
+    // only the performer schedules the auto-pick
     if (phase !== "pick") return;
     if (!performerUid || performerUid !== me) return;
+    if (!pickEndsAt) return;
+    if (firedRef.current) return;
+
+    const serverNow = Date.now() + offsetMs; // server-aligned now
+    let msLeft = pickEndsAt - serverNow;
 
     const auto = async () => {
+      if (firedRef.current) return;
+      firedRef.current = true;
       if (cardsIdx.length && methodIdx != null) {
         await startGuessPhase(code, cardsIdx[0], methodIdx);
         navigate(`/room/${code}/performer2`);
       }
     };
 
-    const msLeft = pickEndsAt - Date.now();
-    const GRACE_MS = 600; // small floor to avoid instant fire on first mount
-    const t = setTimeout(auto, Math.max(msLeft, GRACE_MS));
+    // If already passed (due to clock skew), pick immediately (but at least next tick)
+    if (msLeft <= 0) {
+      const t = setTimeout(auto, 0);
+      return () => clearTimeout(t);
+    }
+
+    // Otherwise schedule
+    const t = setTimeout(auto, msLeft);
     return () => clearTimeout(t);
-  }, [pickEndsAt, phase, performerUid, me, cardsIdx, methodIdx, code, navigate]);
+  }, [phase, performerUid, me, pickEndsAt, offsetMs, cardsIdx, methodIdx, code, navigate]);
 
   const onPick = async (cardIndex) => {
     if (methodIdx == null) return;
+    // cancel pending auto
+    firedRef.current = true;
     await startGuessPhase(code, cardIndex, methodIdx);
     navigate(`/room/${code}/performer2`);
   };
@@ -86,24 +116,24 @@ export default function Performer1() {
 
   return (
     <main className="w-screen h-screen bg-[url(/img/BackgroundPastel.svg)] bg-cover flex flex-col items-center">
-      {/* Method */}
       <div className="rulecontainer program-icons reveal stagger">
-      
-      <div className="flex flex justify-center">
-      <div className="w-96 h-20 text-center text-white text-base font-medium leading-6 italic mt-[10rem]">
-        {methodObj.method}
-      </div>
-      </div>
+        {/* Method */}
+        <div className="flex justify-center">
+          <div className="w-96 h-20 text-center text-white text-base font-medium leading-6 italic mt-[10rem]">
+            {methodObj.method}
+          </div>
+        </div>
 
-      {/* three cards to choose */}
-      <div className="flex flex-wrap gap-4 justify-center mt-6">
-        {cardObjs.map((data, idx) => (
-          <button key={idx} onClick={() => onPick(cardsIdx[idx])}>
-            <WordCard data={data} />
-          </button>
-        ))}
-      </div>
+        {/* three cards to choose */}
+        <div className="flex flex-wrap gap-4 justify-center mt-6">
+          {cardObjs.map((data, idx) => (
+            <button key={idx} onClick={() => onPick(cardsIdx[idx])}>
+              <WordCard data={data} />
+            </button>
+          ))}
+        </div>
       </div>
     </main>
   );
 }
+
