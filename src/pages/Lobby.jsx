@@ -1,7 +1,7 @@
 import "./Lobbystyle.css";
 import { useEffect, useRef, useState } from "react";
 import { useParams, useNavigate } from "react-router";
-import { auth, db } from "/firebaseClient"; // adjust if your init lives elsewhere
+import { auth, db } from "/firebaseClient";
 import {
   ref,
   onValue,
@@ -9,21 +9,27 @@ import {
   runTransaction,
   get,
   child,
+  set,
 } from "firebase/database";
 import chibis from "../data/Images.json";
 import { startPickPhase } from "../game";
 
 export default function Lobby() {
-  const { code } = useParams(); // /room/:code
+  const { code } = useParams();
   const navigate = useNavigate();
 
   const videoRef = useRef(null);
   const [showVideo, setShowVideo] = useState(false);
 
+  // keep track so we don't re-run play() loop repeatedly
+  const [videoStartedLocally, setVideoStartedLocally] = useState(false);
+
   // players: { uid: { name, avatarIndex, joinedAt, performed?, score? } }
   const [players, setPlayers] = useState({});
   const [phase, setPhase] = useState("lobby");
   const [performerUid, setPerformerUid] = useState(null);
+
+  const me = auth.currentUser?.uid || null;
 
   // ---- JOIN: add myself and assign avatarIndex; also MIGRATE older string entries
   useEffect(() => {
@@ -35,7 +41,7 @@ export default function Lobby() {
     runTransaction(playersRef, (current) => {
       const list = current || {};
 
-      // 1) Normalize existing entries: "Albert" -> { name, avatarIndex: null, joinedAt }
+      // normalize existing entries
       const normalized = {};
       const now = Date.now();
       for (const [uid, val] of Object.entries(list)) {
@@ -54,7 +60,7 @@ export default function Lobby() {
         }
       }
 
-      // 2) Ensure I'm in the list (preserve avatar if I already have one)
+      // ensure me
       if (!normalized[u.uid]) {
         normalized[u.uid] = {
           name: u.displayName || "Player",
@@ -71,15 +77,14 @@ export default function Lobby() {
           normalized[u.uid].performed = 0;
       }
 
-      // 3) Compute which avatar indexes are already taken
-      const max = chibis.length; // 6
+      // assign avatars
+      const max = chibis.length;
       const taken = new Set(
         Object.values(normalized)
           .map((p) => (Number.isInteger(p.avatarIndex) ? p.avatarIndex : null))
           .filter((x) => x !== null)
       );
 
-      // 4) Assign avatarIndex to anyone who doesn't have one, in joinedAt order
       const pending = Object.entries(normalized)
         .filter(([_, p]) => !Number.isInteger(p.avatarIndex))
         .sort(
@@ -92,8 +97,7 @@ export default function Lobby() {
         let idx = 0;
         while (taken.has(idx) && idx < max) idx++;
         if (idx >= max) {
-          // lobby full -> don't add new players without index
-          if (uid === u.uid) delete normalized[uid]; // boot me if no slot
+          if (uid === u.uid) delete normalized[uid]; // full
           continue;
         }
         p.avatarIndex = idx;
@@ -102,13 +106,10 @@ export default function Lobby() {
 
       return normalized;
     }).then(async () => {
-      // If I wasn't added (room full), bounce out
       const meSnap = await get(
         child(ref(db), `rooms/${code}/players/${auth.currentUser.uid}`)
       );
-      if (!meSnap.exists()) {
-        navigate("/browse");
-      }
+      if (!meSnap.exists()) navigate("/browse");
     });
   }, [code, navigate]);
 
@@ -125,43 +126,88 @@ export default function Lobby() {
     return () => off(roomRef, "value", unsub);
   }, [code]);
 
-  // ---- PHASE ROUTING: when pick phase starts, split performer vs others
+  // ---- VIDEO SYNC: when rooms/{code}/video flips to playing=true, show + play on ALL clients
   useEffect(() => {
-    const me = auth.currentUser?.uid;
+    if (!code) return;
+    const videoStateRef = ref(db, `rooms/${code}/video`);
+    const unsub = onValue(videoStateRef, async (snap) => {
+      const vs = snap.val() || {};
+      if (!vs.playing) return;
+
+      // Show video everywhere (CSS hides lobby)
+      setShowVideo(true);
+
+      // Only attempt to start once per client
+      if (videoStartedLocally) return;
+
+      const el = videoRef.current;
+      if (!el) return;
+
+      // Initiator can play with sound; others should use muted autoplay for reliability
+      const iAmInitiator = vs.startedBy && vs.startedBy === me;
+
+      try {
+        el.currentTime = 0;
+        el.muted = !iAmInitiator; // initiator = sound on; others = muted autoplay
+        await el.play();
+        setVideoStartedLocally(true);
+      } catch (err) {
+        // If autoplay is still blocked, the element is visible;
+        // user can tap native controls to start.
+        console.warn("Autoplay blocked on this client:", err);
+      }
+    });
+    return () => off(videoStateRef, "value", unsub);
+  }, [code, me, videoStartedLocally]);
+
+  // ---- PHASE ROUTING
+  useEffect(() => {
     if (!me) return;
     if (phase === "pick") {
       if (performerUid === me) navigate(`/room/${code}/performer1`);
       else navigate(`/room/${code}/standby`);
     }
-  }, [phase, performerUid, code, navigate]);
+  }, [phase, performerUid, code, navigate, me]);
 
-  // ---- VIDEO FLOW
+  // ---- BUTTONS
+
+  // ANY player can click "Watch video" → broadcast playing=true (global start)
   const handleStart = async (e) => {
     e.preventDefault();
-    const v = videoRef.current;
-    if (!v) return;
-    setShowVideo(true);
     try {
-      v.muted = false;
-      v.currentTime = 0;
-      await v.play();
+      await set(ref(db, `rooms/${code}/video`), {
+        playing: true,
+        startedAt: Date.now(),
+        startedBy: me || null,
+      });
+
+      // Start locally for the clicker immediately with sound
+      const el = videoRef.current;
+      if (el) {
+        setShowVideo(true);
+        el.muted = false;
+        el.currentTime = 0;
+        await el.play().catch(() => {});
+        setVideoStartedLocally(true);
+      }
     } catch (err) {
-      console.error("Video play failed:", err);
+      console.error("Failed to broadcast video start:", err);
     }
   };
 
-  // New handler for skipping video and starting the game
+  // Skip video and start the game immediately
   const handleSkipVideo = async () => {
     try {
-      await startPickPhase(code); // kick off pick phase immediately
+      await startPickPhase(code);
     } catch (err) {
       console.error("Failed to start game:", err);
     }
   };
 
   const handleEnded = async () => {
-    // ✅ Kick off the pick phase on the server, then the phase effect will route everyone
     await startPickPhase(code);
+    // optional: reset video state so re-entering the lobby doesn’t auto-play
+    await set(ref(db, `rooms/${code}/video`), { playing: false, startedAt: null, startedBy: null });
   };
 
   // Stable rendering order: by avatarIndex (Capybara..Whale)
@@ -171,6 +217,8 @@ export default function Lobby() {
 
   return (
     <main className="lobbybackground">
+      <div className="rulecontainer program-icons reveal stagger">
+      {/* Lobby content (hidden by CSS when showVideo is true) */}
       <section id="gamelobby" className={showVideo ? "is-hidden" : ""}>
         <div className="logomysterycon">
           <img
@@ -190,7 +238,7 @@ export default function Lobby() {
 
           <div id="players">
             {sorted.map(([uid, p]) => {
-              const src = chibis[p?.avatarIndex]?.src || chibis[0].src; // fallback
+              const src = chibis[p?.avatarIndex]?.src || chibis[0].src;
               return (
                 <div className="playerindividual" key={uid}>
                   <img src={import.meta.env.BASE_URL + src} alt="" />
@@ -217,6 +265,7 @@ export default function Lobby() {
         </section>
       </section>
 
+      {/* Video element (shown by CSS when showVideo is true) */}
       <video
         id="introvideo"
         className={showVideo ? "is-visible" : ""}
@@ -226,6 +275,9 @@ export default function Lobby() {
         preload="auto"
         onEnded={handleEnded}
       />
+      </div>
     </main>
   );
 }
+
+

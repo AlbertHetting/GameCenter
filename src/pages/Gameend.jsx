@@ -56,6 +56,7 @@ export default function GameEnd() {
 
   return (
     <main className="EndBackground">
+      <div className="rulecontainer program-icons reveal stagger">
       <div className="logomysteryconEnd">
         <img
           className="logomysteryEnd"
@@ -65,7 +66,7 @@ export default function GameEnd() {
       </div>
 
       {/* Winner podium */}
-      <section>
+      <section className="firstplace">
         {top3[0] && (
           <div className="avatar-container">
             <p>1st</p>
@@ -123,6 +124,7 @@ export default function GameEnd() {
         </button>
       </div>
       </Link>
+      </div>
     </main>
   );
 }

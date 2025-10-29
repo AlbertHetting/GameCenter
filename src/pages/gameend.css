@@ -33,11 +33,16 @@
     font-style: italic;
 }
 
+.firstplace{
+    display: flex;
+    justify-content: center;
+}
 
 .avatar-container{
     width: 10rem;
     height: 10rem;
     font-family: "poppins", sans-serif;
+    align-items: center;
     font-size: 18px;
     font-weight: 700;
     color:white;
@@ -62,6 +67,7 @@
 
 .secondand3place{
     display: flex;
+    justify-content: center;
     flex-direction: row;
     margin-top: 5rem;
     gap: 3rem;

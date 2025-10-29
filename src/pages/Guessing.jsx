@@ -59,6 +59,7 @@ export default function Guessing() {
 
   return (
     <main className="GuessBackground">
+      <div className="rulecontainer program-icons reveal stagger">
       <section className="GuessInstruction">
         <h2>
           Try to guess what <span className="player-name">{perfName}</span> is acting out!
@@ -94,6 +95,7 @@ export default function Guessing() {
 
       <div id="GameTipsText">
         <h3>remember there are no stupid guesses, except for the stupid ones!</h3>
+      </div>
       </div>
     </main>
   );

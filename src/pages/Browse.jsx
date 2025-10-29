@@ -1,9 +1,11 @@
+import "./browseani.css";
 import ButtonJoinGame from "../components/ButtonJoinGame";
 import ThumbnailGrid from "../components/ThumbnailGrid";
 
 export default function Browse() {
   return (
     <main className="flex flex-col items-center browse-background">
+      <div className="rulecontainer program-icons reveal stagger">
       <div className="logo">
         <section className="logocon flex flex-col items-center gap-4">
           <img
@@ -32,6 +34,7 @@ export default function Browse() {
         {/* Tiles */}
         <ThumbnailGrid />
       </section>
+      </div>
     </main>
   );
 }

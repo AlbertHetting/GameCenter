@@ -78,7 +78,7 @@ export default function Performer1() {
 
   if (!ready) {
     return (
-      <main className="w-screen h-screen bg-[url(/img/BackgroundPastel.svg)] bg-cover flex items-center justify-center">
+      <main className="w-screen h-screen bg-[url(/img/BackgroundPastel.svg)] bg-cover flex items-center">
         <p className="text-white text-xl">Getting your prompt…</p>
       </main>
     );
@@ -87,8 +87,12 @@ export default function Performer1() {
   return (
     <main className="w-screen h-screen bg-[url(/img/BackgroundPastel.svg)] bg-cover flex flex-col items-center">
       {/* Method */}
-      <div className="w-96 h-20 text-center text-white text-base font-medium leading-6 italic mt-6">
+      <div className="rulecontainer program-icons reveal stagger">
+      
+      <div className="flex flex justify-center">
+      <div className="w-96 h-20 text-center text-white text-base font-medium leading-6 italic mt-[10rem]">
         {methodObj.method}
+      </div>
       </div>
 
       {/* three cards to choose */}
@@ -98,6 +102,7 @@ export default function Performer1() {
             <WordCard data={data} />
           </button>
         ))}
+      </div>
       </div>
     </main>
   );

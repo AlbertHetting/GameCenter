@@ -80,6 +80,7 @@ export default function Performer2() {
   return (
     <main className="w-screen h-screen bg-[url(/img/BackgroundPastel.svg)] bg-cover flex flex-col items-center justify-center">
       {/* 90s countdown */}
+      <div className="rulecontainer program-icons reveal stagger">
       <div className="text-white text-4xl font-semibold font-['Poppins'] flex mt-6 justify-center items-center gap-3">
         <div><p>{secondsLeft}</p></div>
         <div><img src={import.meta.env.BASE_URL + "/img/icon-timer-white.svg"} alt="" /></div>
@@ -93,6 +94,7 @@ export default function Performer2() {
       {/* Chosen card */}
       <div className="flex flex-wrap gap-4 justify-center mt-6">
         {card && <WordCard data={card} />}
+      </div>
       </div>
     </main>
   );
