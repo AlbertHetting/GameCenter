@@ -4,7 +4,7 @@ import ThumbnailGrid from "../components/ThumbnailGrid";
 
 export default function Browse() {
   return (
-    <main className="flex flex-col items-center browse-background">
+    <main className="flex flex-col items-center browse-background md:ml-4 md:mr-4">
       <div className="rulecontainer program-icons reveal stagger">
       <div className="logo">
         <section className="logocon flex flex-col items-center gap-4">
