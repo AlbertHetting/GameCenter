@@ -1,7 +1,7 @@
 [
   {
     "title": "Mystery Bowl",
-    "description": "Ala charades",
+    "description": "Guessing Game",
     "background": "/img/BackgroundMysterBox.svg",
     "players": "2-10",
     "timer": "20 min.",
@@ -10,7 +10,7 @@
   {
     "title": "Mind Game",
     "description": "Ala wavelength",
-    "background": "img/BackgroundMind.svg",
+    "background": "img/BackgroundMindGame.png",
     "players": "2-5",
     "timer": "15 min.",
     "link": "mind-game"
