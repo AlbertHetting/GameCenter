@@ -1,11 +1,13 @@
 import { useNavigate } from "react-router";
-export default function ButtonJoinGame({ onClick }) {
-  const navigate = useNavigate(); // initialize navigation hook
+export default function ButtonJoinGame( {onClick} ) {
+  const navigate = useNavigate(); // Navigation hook
 
   function handleClick() {
     navigate("/join");
   }
+ 
 
+  // Rendered Components
   return (
     <button
       onClick={handleClick}

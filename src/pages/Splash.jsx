@@ -1,4 +1,3 @@
-// src/pages/Splash.jsx
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
 
@@ -7,8 +6,8 @@ export default function Splash() {
 
     useEffect(() => {
     const timer = setTimeout(() => {
-      navigate("/guide"); // redirect after loading
-    }, 10000); // show splash for 2s
+      navigate("/guide"); 
+    }, 5000); 
 
     return () => clearTimeout(timer);
   }, [navigate]);

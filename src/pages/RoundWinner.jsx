@@ -26,25 +26,25 @@ export default function RoundWinner() {
   const wImg =
     wPlayer?.avatarIndex != null ? chibis[wPlayer.avatarIndex]?.src : chibis[0].src;
 
-  // After 10s → advance or end
+  // After 10s advance or end
   useEffect(() => {
     const t = setTimeout(async () => {
       await advanceOrEnd(code);
-      // listen for phase transition
+      // Listen for phase transition
     }, 10000);
     return () => clearTimeout(t);
   }, [code]);
 
-  // react to phase change
+  // React to phase change
   useEffect(() => {
     if (!room?.phase) return;
     if (room.phase === "game_end") navigate(`/room/${code}/gameend`);
     if (room.phase === "pick_prep") {
-      // start next pick (assign next performer)
+      // Start next pick (assign next performer)
       startPickPhase(code);
     }
     if (room.phase === "pick") {
-      // back into the pick flow
+      // Back into the pick flow
       navigate(`/room/${code}/standby`);
     }
   }, [room?.phase, code, navigate]);
@@ -78,7 +78,6 @@ export default function RoundWinner() {
         </>
       ) : (
         <>
-          {/* No winner UI */}
           <div className="text-center">
             <div className="text-white text-4xl font-semibold">Time’s up!</div>
             <div className="text-rose-300 text-2xl font-semibold mt-[5rem]">

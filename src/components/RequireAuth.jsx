@@ -17,12 +17,12 @@ export default function RequireAuth({ children }) {
   }, []);
 
   if (checking) {
-    // minimal fallback while Firebase restores session
+    // Fallback when Firebase restores session
     return <div style={{ padding: 16 }}>Loading…</div>;
   }
 
   if (!user) {
-    // Not signed in → send to profile (keep where they tried to go)
+    // Not signed in, send to profile (keep where they tried to go)
     return <Navigate to="/profile" replace state={{ from: location }} />;
   }
 

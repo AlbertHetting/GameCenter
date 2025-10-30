@@ -2,7 +2,7 @@ import { auth, db } from "/firebaseClient";
 import { ref, get, set, child, serverTimestamp } from "firebase/database";
 
 const CHARS = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; // avoid 0/O/I/1
-function randomCode(len = 8) {
+function randomCode(len = 4) {
   let s = "";
   for (let i = 0; i < len; i++) s += CHARS[Math.floor(Math.random() * CHARS.length)];
   return s;

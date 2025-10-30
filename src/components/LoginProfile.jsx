@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./profile.css";
-import { auth } from "/firebaseClient"; // from Step 2
+import { auth } from "/firebaseClient"; 
 import ButtonReturnToSignup from "./ButtonReturnToSignup";
 import ButtonLogin from "./ButtonLogin";
 import {
@@ -14,11 +14,11 @@ import { useNavigate } from "react-router";
 export default function LoginProfile() {
 
 
-// --- Form state: email, username, password ---
+// Form state: email, username, password
 const [email, setEmail] = useState("");
 const [password, setPassword] = useState("");
 
-// --- Feedback (optional but helpful) ---
+// Feedback (optional but helpful)
 const [formError, setFormError] = useState("");
 const [formSuccess, setFormSuccess] = useState("");
 
@@ -31,16 +31,16 @@ async function onSubmit(e) {
   setFormSuccess("");
 
   try {
-    // Sign in the user
+    // Sign in
     await signInWithEmailAndPassword(auth, email, password);
 
     setFormSuccess("Logged in! Redirecting...");
 
-    // ✅ Redirect immediately after successful login
+    // Redirect after successful login
     navigate("/browse");
 
   } catch (err) {
-    // Show raw Firebase message for simplicity
+    // Show raw Firebase message
     setFormError(err.message || "Login failed. Check your email or password and try again.");
   }
 }
@@ -89,7 +89,7 @@ async function onSubmit(e) {
     <ButtonLogin />
         
 
-        <h4 className="text-center font-semi text-white">Don't have a <br /> user?</h4>
+        <h4 className="text-center font-semi text-white">Don&#39;t have a <br /> user?</h4>
     <ButtonReturnToSignup type="submit"/>
         
       </div>

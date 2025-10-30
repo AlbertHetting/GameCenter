@@ -17,7 +17,7 @@ export default function Performer2() {
   const [cardIdx, setCardIdx] = useState(null);
   const [methodIdx, setMethodIdx] = useState(null);
 
-  const [roundEndsAt, setRoundEndsAt] = useState(null); // ms epoch
+  const [roundEndsAt, setRoundEndsAt] = useState(null);
   const [secondsLeft, setSecondsLeft] = useState(90);
 
   // Subscribe to the room: phase, performer, winner, prompt choice, timer
@@ -55,7 +55,7 @@ export default function Performer2() {
       setSecondsLeft(s);
     };
 
-    // initial render
+    // Initial render
     tick();
     const id = setInterval(tick, 250);
     return () => clearInterval(id);
@@ -66,9 +66,9 @@ export default function Performer2() {
     const me = auth.currentUser?.uid;
     if (!me || !performerUid) return;
     if (secondsLeft > 0) return;
-    if (winner) return;                 // already decided
-    if (phase !== "guess") return;      // only act during guess phase
-    if (me !== performerUid) return;    // only the performer flips the phase to avoid races
+    if (winner) return;                 
+    if (phase !== "guess") return;     
+    if (me !== performerUid) return;   
 
     // Mark the round as ended with no winner; everyone will navigate via phase change
     update(ref(db, `rooms/${code}`), { phase: "round_end" }).catch(console.error);
@@ -79,7 +79,7 @@ export default function Performer2() {
 
   return (
     <main className="w-screen h-screen bg-[url(/img/BackgroundPastel.svg)] bg-cover flex flex-col items-center justify-center">
-      {/* 90s countdown */}
+  
       <div className="rulecontainer program-icons reveal stagger">
       <div className="text-white text-4xl font-semibold font-['Poppins'] flex mt-6 justify-center items-center gap-3">
         <div><p>{secondsLeft}</p></div>

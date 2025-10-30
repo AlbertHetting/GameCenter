@@ -41,7 +41,7 @@ async function onSubmit(e) {
     // Set display name
     await updateProfile(cred.user, { displayName: username });
 
-    // Store a tiny profile in Realtime DB
+    // Store a  profile in Realtime DB
     const { uid } = cred.user;
     await set(ref(db, `users/${uid}`), {
       uid,
@@ -52,11 +52,11 @@ async function onSubmit(e) {
 
     setFormSuccess("Account created!")  
 
-     // ✅ Redirect immediately after successful login
+     // Redirect after successful login
     navigate("/browse");
     
   } catch (err) {
-    // Show raw Firebase message for simplicity
+    // Show raw Firebase message
     setFormError(err.message || "Something went wrong.");
   }
 }
@@ -94,6 +94,7 @@ async function onSubmit(e) {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           placeholder="Username"
+          maxLength={8}
         />
     
 

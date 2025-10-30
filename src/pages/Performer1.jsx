@@ -3,7 +3,6 @@ import { auth, db } from "/firebaseClient";
 import { useParams, useNavigate } from "react-router";
 import { ref, onValue, off } from "firebase/database";
 import WordCard from "../components/WordCard";
-import Method from "../components/Method";
 import WordCardData from "../data/WordCardData.json";
 import MethodData from "../data/MethodData.json";
 import { startGuessPhase } from "../game";
@@ -14,15 +13,15 @@ export default function Performer1() {
   const me = auth.currentUser?.uid;
 
   const [performerUid, setPerformerUid] = useState(null);
-  const [cardsIdx, setCardsIdx] = useState([]); // [i,j,k]
+  const [cardsIdx, setCardsIdx] = useState([]);
   const [methodIdx, setMethodIdx] = useState(null);
-  const [pickEndsAt, setPickEndsAt] = useState(null); // ms epoch (written by host/client)
+  const [pickEndsAt, setPickEndsAt] = useState(null);
   const [phase, setPhase] = useState(null);
 
-  // 🔧 server time offset (ms), so Date.now() + offsetMs ≈ server time
+  // Server time offset (ms), so Date.now() + offsetMs ≈ server time
   const [offsetMs, setOffsetMs] = useState(0);
 
-  // subscribe server time offset once
+  // Subscribe server time offset once
   useEffect(() => {
     const offRef = ref(db, ".info/serverTimeOffset");
     const unsub = onValue(offRef, (snap) => {
@@ -33,7 +32,7 @@ export default function Performer1() {
     return () => off(offRef, "value", unsub);
   }, []);
 
-  // subscribe prompt + performer + timers
+  // Subscribe prompt + performer + timers
   useEffect(() => {
     const roomRef = ref(db, `rooms/${code}`);
     const unsub = onValue(roomRef, (snap) => {
@@ -49,13 +48,13 @@ export default function Performer1() {
     return () => off(roomRef, "value", unsub);
   }, [code]);
 
-  // if I'm not the performer, go to standby
+  // if player not the performer, go to standby
   useEffect(() => {
     if (!performerUid || !me) return;
     if (performerUid !== me) navigate(`/room/${code}/standby`);
   }, [performerUid, me, code, navigate]);
 
-  // if phase already moved to guess, go to performer2
+  // If phase already moved to guess, go to performer2
   useEffect(() => {
     if (phase === "guess") navigate(`/room/${code}/performer2`);
   }, [phase, code, navigate]);
@@ -64,16 +63,16 @@ export default function Performer1() {
   const cardObjs = cardsIdx.map((i) => WordCardData[i]).filter(Boolean);
 
   // 20s countdown & auto-pick (server-aligned)
-  const firedRef = useRef(false); // prevent double firing across renders
+  const firedRef = useRef(false); 
 
   useEffect(() => {
-    // only the performer schedules the auto-pick
+    // Only the performer schedules the auto-pick
     if (phase !== "pick") return;
     if (!performerUid || performerUid !== me) return;
     if (!pickEndsAt) return;
     if (firedRef.current) return;
 
-    const serverNow = Date.now() + offsetMs; // server-aligned now
+    const serverNow = Date.now() + offsetMs;
     let msLeft = pickEndsAt - serverNow;
 
     const auto = async () => {
@@ -85,7 +84,7 @@ export default function Performer1() {
       }
     };
 
-    // If already passed (due to clock skew), pick immediately (but at least next tick)
+    // If already passed (due to clock skew), pick immediately.
     if (msLeft <= 0) {
       const t = setTimeout(auto, 0);
       return () => clearTimeout(t);
@@ -98,7 +97,7 @@ export default function Performer1() {
 
   const onPick = async (cardIndex) => {
     if (methodIdx == null) return;
-    // cancel pending auto
+    // Cancel pending auto
     firedRef.current = true;
     await startGuessPhase(code, cardIndex, methodIdx);
     navigate(`/room/${code}/performer2`);
@@ -117,14 +116,12 @@ export default function Performer1() {
   return (
     <main className="w-screen h-screen bg-[url(/img/BackgroundPastel.svg)] bg-cover flex flex-col items-center">
       <div className="rulecontainer program-icons reveal stagger">
-        {/* Method */}
         <div className="flex justify-center">
           <div className="w-96 h-20 text-center text-white text-base font-medium leading-6 italic mt-[10rem]">
             {methodObj.method}
           </div>
         </div>
 
-        {/* three cards to choose */}
         <div className="flex flex-wrap gap-4 justify-center mt-6">
           {cardObjs.map((data, idx) => (
             <button key={idx} onClick={() => onPick(cardsIdx[idx])}>

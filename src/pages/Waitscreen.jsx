@@ -1,7 +1,7 @@
 import "./wait.css";
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router"; // use react-router-dom
-import { auth, db } from "/firebaseClient";                // adjust path if needed
+import { useParams, useNavigate } from "react-router"; 
+import { auth, db } from "/firebaseClient";  
 import { ref, onValue, off } from "firebase/database";
 import chibis from "../data/Images.json";
 
@@ -20,13 +20,13 @@ export default function Wait() {
     const unsub = onValue(roomRef, (snap) => {
       const v = snap.val() || {};
       setPlayers(v.players || {});
-      setPerformerUid(v.performerUid || null); // ✅ fixed
+      setPerformerUid(v.performerUid || null);
       setPhase(v.phase || null);
     });
     return () => off(roomRef, "value", unsub);
   }, [code]);
 
-  // react to phase changes
+  // React to phase changes
   useEffect(() => {
     if (!phase) return;
     if (phase === "guess") navigate(`/room/${code}/guessing`);
