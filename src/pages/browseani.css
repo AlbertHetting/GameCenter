@@ -1,8 +1,8 @@
-/* ===== Reveal-on-load (no JS) ===== */
+/* Reveal-on-load */
 :root {
   --reveal-distance: -25px;
   --reveal-duration: 0.5s;
-  --stagger-step: 120ms; /* tweak as you like */
+  --stagger-step: 120ms; 
 }
 
 @keyframes fadeDownIn {
@@ -16,7 +16,7 @@
   }
 }
 
-/* Option A: generic "great-grandchildren" selector */
+
 .program-icons.reveal > * > * > * > * {
   opacity: 0;
   animation: fadeDownIn var(--reveal-duration) ease forwards;
@@ -27,8 +27,6 @@
   opacity: 0;
   animation: fadeDownIn var(--reveal-duration) ease forwards;
 }
-
-/* Stagger delays for the rule items (1..9, adjust as needed) */
 .program-icons.reveal.stagger
   > section
   > .rulecontainer

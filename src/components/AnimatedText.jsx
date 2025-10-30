@@ -18,7 +18,7 @@ export default function AnimatedText({ initialText, animatedTextArray }) {
     typed.current = new Typed(el.current, options);
 
     return () => {
-      typed.current.destroy(); // cleanup Typed instance
+      typed.current.destroy();
     };
   }, [animatedTextArray]);
 
