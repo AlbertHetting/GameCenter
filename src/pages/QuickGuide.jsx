@@ -17,7 +17,7 @@ export default function QuickGuide(){
         </div>
 
         <div className="textcon">
-        <h1>Games have rules here's how to play!</h1>
+        <h1>Games have rules here&#39;s how to play!</h1>
         </div>
         </div>
         <div className="rulecontainer">

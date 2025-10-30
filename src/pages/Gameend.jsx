@@ -17,12 +17,12 @@ export default function GameEnd() {
     return () => off(roomRef, "value", unsub);
   }, [code]);
 
-  // Auto-delete room + return to browse after 60s
+  // Auto-delete room and return to browse after 60s
   useEffect(() => {
     const t = setTimeout(async () => {
       try {
         if (code) {
-          await remove(ref(db, `rooms/${code}`)); // safe if already removed
+          await remove(ref(db, `rooms/${code}`)); // Safe if already removed
         }
       } finally {
         navigate("/browse", { replace: true });
@@ -32,7 +32,7 @@ export default function GameEnd() {
     return () => clearTimeout(t);
   }, [code, navigate]);
 
-  // Optional: immediate cleanup + navigate when pressing the button
+  // Immediate cleanup and navigate when pressing the button
   async function handleBackNow() {
     try {
       if (code) {
@@ -64,8 +64,6 @@ export default function GameEnd() {
           alt=""
         />
       </div>
-
-      {/* Winner podium */}
       <section className="firstplace">
         {top3[0] && (
           <div className="avatar-container">

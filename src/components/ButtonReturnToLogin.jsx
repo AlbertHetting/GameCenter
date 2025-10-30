@@ -10,9 +10,9 @@ export default function ButtonReturnToLogin() {
   return (
     <button className="w-44 h-12 bg-black rounded-2xl"onClick={handleClick}>
       <p className="text-white
-text-2xl
-font-bold
-font-['Inter']" >Login</p>
+    text-2xl
+    font-bold
+    ont-['Inter']" >Login</p>
     </button>
 
   );

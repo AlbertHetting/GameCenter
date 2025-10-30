@@ -10,9 +10,9 @@ export default function ButtonReturnToSignup() {
   return (
     <button className="w-44 h-12 bg-white rounded-2xl" onClick={handleClick}>
       <p className="text-black
-text-2xl
-font-bold
-font-['Inter']" >Sign Up</p>
+    text-2xl
+    font-bold
+    font-['Inter']" >Sign Up</p>
     </button>
 
   );

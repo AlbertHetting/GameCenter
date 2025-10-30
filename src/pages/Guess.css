@@ -1,14 +1,14 @@
 .GuessBackground {
   margin: 0;
-  display: flex; /* flex */
-  flex-direction: column; /* flex-col */
-  height: 100vh; /* h-screen */
-  width: 100vw; /* w-screen */
-  align-items: center; /* items-center */
+  display: flex; 
+  flex-direction: column; 
+  height: 100vh; 
+  width: 100vw; 
+  align-items: center; 
 
-  background-image: url("/img/GameBackground.png"); /* bg-[url(...)] */
-  background-size: cover; /* bg-cover */
-  background-position: center; /* bg-center */
+  background-image: url("/img/GameBackground.png"); 
+  background-size: cover; 
+  background-position: center; 
   background-repeat: no-repeat;
 }
 

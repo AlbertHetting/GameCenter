@@ -18,8 +18,6 @@ export default function Browse() {
           </h1>
         </section>
       </div>
-
-      {/*Game tiles */}
       <section className="w-96 h-auto flex flex-col gap-8 mb-4">
         <div className="button-container">
           <ButtonJoinGame />
@@ -30,8 +28,6 @@ export default function Browse() {
             Host a game
           </h4>
         </div>
-
-        {/* Tiles */}
         <ThumbnailGrid />
       </section>
       </div>

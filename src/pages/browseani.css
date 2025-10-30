@@ -15,8 +15,6 @@
     transform: none;
   }
 }
-
-
 .program-icons.reveal > * > * > * > * {
   opacity: 0;
   animation: fadeDownIn var(--reveal-duration) ease forwards;

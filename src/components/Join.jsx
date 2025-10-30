@@ -1,22 +1,21 @@
-// src/pages/JoinGameCode.jsx
 import "./Join.css";
 import { useState } from "react";
-import { useNavigate, Link } from "react-router";     // <- use react-router-dom
-import { joinRoom } from "/rooms";                  // <- our helper
+import { useNavigate, Link } from "react-router";
+import { joinRoom } from "/rooms";
 
 export default function JoinGame() {
   const navigate = useNavigate();
 
-  // local state
+  // Local state
   const [code, setCode] = useState("");
   const [err, setErr] = useState("");
 
-  // submit handler
+  // Submit handler
   async function onSubmit(e) {
     e.preventDefault();
     setErr("");
 
-    // Keep it simple: trim + uppercase (nice UX)
+    // Uppercase Transform
     const clean = code.trim().toUpperCase();
     if (!clean) {
       setErr("Please enter a room code.");
@@ -24,10 +23,10 @@ export default function JoinGame() {
     }
 
     try {
-      await joinRoom(clean);         // writes this user under /rooms/{code}/players/{uid}
-      navigate(`/room/${clean}`);    // go to the lobby URL
+      await joinRoom(clean);         // User under /rooms/{code}/players/{uid}
+      navigate(`/room/${clean}`);    // Go to lobby URL
     } catch (e2) {
-      // Show a simple, friendly message
+      // Show a simple, friendly message depending on errors
       if (e2?.message?.toLowerCase().includes("not found")) {
         setErr("That room code doesn't exist.");
       } else if (e2?.message?.toLowerCase().includes("signed in")) {
@@ -62,7 +61,6 @@ export default function JoinGame() {
             </section>
           </div>
 
-          {/* IMPORTANT: real <form> with onSubmit */}
           <form onSubmit={onSubmit}>
             <div className="form-joingame">
               <input
@@ -72,7 +70,7 @@ export default function JoinGame() {
                 placeholder="Join Code"
                 value={code}
                 onChange={(e) => setCode(e.target.value)}
-                autoCapitalize="characters"   // helps on mobile
+                autoCapitalize="characters"   // Helps Mobile
                 autoCorrect="off"
                 spellCheck={false}
               />
@@ -84,7 +82,6 @@ export default function JoinGame() {
 
             <div className="button-container">
               <div className="continuecon">
-                {/* Use a submit button (NOT a Link) so we can run joinRoom first */}
                 <button type="submit" className="continuebutton">
                   <h4>Join Game</h4>
                 </button>

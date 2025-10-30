@@ -13,6 +13,7 @@ import {
 } from "firebase/database";
 import chibis from "../data/Images.json";
 import { startPickPhase } from "../game";
+import { Link } from "react-router";
 
 export default function Lobby() {
   const { code } = useParams();
@@ -21,7 +22,7 @@ export default function Lobby() {
   const videoRef = useRef(null);
   const [showVideo, setShowVideo] = useState(false);
 
-  // keep track so we don't re-run play() loop repeatedly
+  // keep track to not re-run play() loop repeatedly
   const [videoStartedLocally, setVideoStartedLocally] = useState(false);
 
   // players: { uid: { name, avatarIndex, joinedAt, performed?, score? } }
@@ -31,7 +32,7 @@ export default function Lobby() {
 
   const me = auth.currentUser?.uid || null;
 
-  // ---- JOIN: add myself and assign avatarIndex; also MIGRATE older string entries
+  // JOIN: add player and assign avatarIndex; also MIGRATE older string entries
   useEffect(() => {
     const u = auth.currentUser;
     if (!u || !code) return;
@@ -41,7 +42,7 @@ export default function Lobby() {
     runTransaction(playersRef, (current) => {
       const list = current || {};
 
-      // normalize existing entries
+      // Normalize existing entries
       const normalized = {};
       const now = Date.now();
       for (const [uid, val] of Object.entries(list)) {
@@ -60,7 +61,6 @@ export default function Lobby() {
         }
       }
 
-      // ensure me
       if (!normalized[u.uid]) {
         normalized[u.uid] = {
           name: u.displayName || "Player",
@@ -77,7 +77,7 @@ export default function Lobby() {
           normalized[u.uid].performed = 0;
       }
 
-      // assign avatars
+      // Assign avatars
       const max = chibis.length;
       const taken = new Set(
         Object.values(normalized)
@@ -218,8 +218,18 @@ export default function Lobby() {
   return (
     <main className="lobbybackground">
       <div className="rulecontainer program-icons reveal stagger">
-      {/* Lobby content (hidden by CSS when showVideo is true) */}
       <section id="gamelobby" className={showVideo ? "is-hidden" : ""}>
+
+          <div className="Back2Browse">
+          <Link to="/browse">
+            <img
+              className="backspace"
+              src={import.meta.env.BASE_URL + "/img/BackSpace.png"}
+              alt="Return"
+            />
+          </Link>
+        </div>
+
         <div className="logomysterycon">
           <img
             className="logomystery"
@@ -264,8 +274,6 @@ export default function Lobby() {
           </section>
         </section>
       </section>
-
-      {/* Video element (shown by CSS when showVideo is true) */}
       <video
         id="introvideo"
         className={showVideo ? "is-visible" : ""}
