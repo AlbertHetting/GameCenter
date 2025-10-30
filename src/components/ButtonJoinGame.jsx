@@ -11,7 +11,7 @@ export default function ButtonJoinGame( {onClick} ) {
   return (
     <button
       onClick={handleClick}
-      className="flex w-96 h-24 bg-black/50 mix-blend-overlay rounded-2xl shadow-[0px_4px_4px_rgba(0,0,0,0.25)] backdrop-blur-[2px] items-center justify-center hover:bg-black/70 transition-colors"
+      className="flex w-[100%] h-24 bg-black/50 mix-blend-overlay rounded-2xl shadow-[0px_4px_4px_rgba(0,0,0,0.25)] backdrop-blur-[2px] items-center justify-center hover:bg-black/70 transition-colors"
     >
       <div className="flex gap-4 items-center">
         <h1 className="text-white text-4xl font-medium font-['Inter']">

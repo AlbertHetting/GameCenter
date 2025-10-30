@@ -12,75 +12,76 @@
   background-repeat: no-repeat;
 }
 
-.joincon{
+.joincon {
   margin-top: -3rem;
 }
 
-.logo-game{
-    margin-top: 0rem;
-    display: flex;
-    justify-content: center;
+.logo-game {
+  margin-top: 0rem;
+  display: flex;
+  justify-content: center;
 }
 
-.logocon-join-game h1{
-    margin-top: 6rem;
-    text-align: center;
-    font-size: 35px;
-    align-items: center;
-    font-family: "Inter", sans-serif;
-    color: #FFF;
+.logocon-join-game h1 {
+  margin-top: 6rem;
+  text-align: center;
+  font-size: 35px;
+  align-items: center;
+  font-family: "Inter", sans-serif;
+  color: #fff;
 }
 
-.logocon-game img{
-    margin-top: 1rem;
-    max-width: 72vw;
+.logocon-game img {
+  margin-top: 1rem;
+  max-width: 72vw;
 }
 
 /*Forms*/
 
-form{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 2rem;
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
 }
 
-.input-area-game{
-border-radius: 14px;
-border: 2px solid #FFF;
-background: #FFF;
-margin-bottom: 0rem;
-padding: 10px;
-width: 18rem;
-height: 4.2rem;
-flex-shrink: 0;
+.input-area-game {
+  border-radius: 14px;
+  border: 2px solid #fff;
+  background: #fff;
+  margin-bottom: 0rem;
+  padding: 10px;
+  width: 18rem;
+  height: 4.2rem;
+  flex-shrink: 0;
 }
 
-.input-area-game::placeholder{
-font-size: 27px;
-text-align: center;
-font-family: "Inter" sans-serif;
-color: grey;
+.input-area-game::placeholder {
+  font-size: 27px;
+  text-align: center;
+  font-family: "Inter" sans-serif;
+  color: grey;
 }
 
-.input-area-game, text{
-text-align: center;
-font-size: 32px;
-font-family: "Inter" sans-serif;
-font-weight: 700;
+.input-area-game,
+text {
+  text-align: center;
+  font-size: 32px;
+  font-family: "Inter" sans-serif;
+  font-weight: 700;
 }
 
-.button-container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    justify-self: center;
-    margin-top: 2rem;
+.button-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-self: center;
+  margin-top: 2rem;
 }
 
-.button-container h4{
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+.button-container h4 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 
@@ -120,21 +121,28 @@ font-weight: 700;
 .program-icons.reveal.stagger > section > .rulecontainer > .numberrule:nth-child(1) {
   animation-delay: calc(0 * var(--stagger-step));
 }
-.program-icons.reveal.stagger > section > .rulecontainer > .numberrule:nth-child(2) {
+.program-icons.reveal.stagger
+  > section
+  > .rulecontainer
+  > .numberrule:nth-child(2) {
   animation-delay: calc(1 * var(--stagger-step));
 }
-.program-icons.reveal.stagger > section > .rulecontainer > .numberrule:nth-child(3) {
+.program-icons.reveal.stagger
+  > section
+  > .rulecontainer
+  > .numberrule:nth-child(3) {
   animation-delay: calc(2 * var(--stagger-step));
 }
-.program-icons.reveal.stagger > section > .rulecontainer > .numberrule:nth-child(4) {
+.program-icons.reveal.stagger
+  > section
+  > .rulecontainer
+  > .numberrule:nth-child(4) {
   animation-delay: calc(3 * var(--stagger-step));
 }
 
-
-
-.backspace{
-    max-width: 2rem;
-    position: absolute;
-    margin-top: -2rem;
-    margin-left: 1rem;
+.backspace {
+  max-width: 2rem;
+  position: absolute;
+  margin-top: -2rem;
+  margin-left: 1rem;
 }
