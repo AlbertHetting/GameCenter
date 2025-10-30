@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router";
 export default function ButtonReturnToLogin() {
 
-    const navigate = useNavigate(); // initialize navigation hook
+    const navigate = useNavigate(); 
 
   function handleClick() {
-    navigate("/login"); // navigate to /profile
+    navigate("/login"); 
   }
 
   return (
